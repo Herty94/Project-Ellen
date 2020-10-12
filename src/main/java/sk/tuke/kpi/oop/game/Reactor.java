@@ -9,6 +9,7 @@ public class Reactor extends AbstractActor {
     private Animation normalAnimation;
     private Animation redAnimation;
     private Animation destroyedAnimation;
+    private boolean state;
 
     public Reactor(){
         this.temperature = 0;
@@ -53,6 +54,12 @@ public class Reactor extends AbstractActor {
         else
             this.temperature-=Math.ceil(decrement*0.5);
         updateAnimation();
+    }
+    public void turnOff(){
+
+    }
+    public void turnOn(){
+
     }
     private void updateAnimation(){
         float frameRate = 0.15f-(0.12f/100.0f*this.damage);
