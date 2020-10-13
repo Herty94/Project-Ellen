@@ -11,6 +11,8 @@ public class Reactor extends AbstractActor {
     private Animation destroyedAnimation;
     private Animation offAnimation;
     private boolean state;
+    private boolean destroyed;
+    private Light light;
 
     public Reactor(){
         this.temperature = 0;
@@ -21,6 +23,8 @@ public class Reactor extends AbstractActor {
         this.offAnimation = new Animation("sprites/reactor.png");
         setAnimation(offAnimation);
         this.state = false;
+        this.light = null;
+        this.destroyed = false;
     }
 
     public int getTemperature() {
@@ -75,18 +79,40 @@ public class Reactor extends AbstractActor {
         updateAnimation();
     }
     public void repairWith(Hammer hammer){
+        int pom = 0;
         if(hammer == null || this.damage<=0 || !hammer.use())
             return;
-        if(this.damage<=50)
-            this.damage= 0;
+        destroyed = false;
+        if(this.damage<=50) {
+            pom = 2000/50*(50-this.damage);
+            this.damage = 0;
+
+        }
         else
             this.damage-=50;
+        this.temperature = 4000/100*this.damage+2000-pom;
+        updateAnimation();
+
+    }
+    public void addLight(Light light){
+        this.light = light;
+        updateAnimation();
+    }
+    public void removeLight(){
+        this.light = null;
+        updateAnimation();
     }
     private void updateAnimation(){
         if(!this.state){
-            setAnimation(offAnimation);
+            if(!destroyed)
+                setAnimation(offAnimation);
+            if(light != null)
+                light.setElectricityFlow(false);
             return;
         }
+        else
+            if(light != null)
+                light.setElectricityFlow(true);
         float frameRate = 0.15f-(0.12f/100.0f*this.damage);
         if(this.damage>20) {
             //  redAnimation.setFrameDuration();
@@ -99,6 +125,7 @@ public class Reactor extends AbstractActor {
         else
             setAnimation(this.normalAnimation);
         if(this.temperature>=6000) {
+            this.destroyed = true;
             setAnimation(this.destroyedAnimation);
             this.state = false;
         }
