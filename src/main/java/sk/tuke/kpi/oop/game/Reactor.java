@@ -78,6 +78,13 @@ public class Reactor extends AbstractActor {
         this.state = true;
         updateAnimation();
     }
+    public void extinguishWith(FireExtinguisher fireExt){
+        if(fireExt == null || this.damage<=0 || !fireExt.use())
+            return;
+        if(this.temperature>4000);
+            this.temperature= 4000;
+        updateAnimation();
+    }
     public void repairWith(Hammer hammer){
         int pom = 0;
         if(hammer == null || this.damage<=0 || !hammer.use())
