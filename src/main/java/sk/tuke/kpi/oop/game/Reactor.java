@@ -1,15 +1,21 @@
 package sk.tuke.kpi.oop.game;
 
+import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
+import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
+import sk.tuke.kpi.oop.game.tools.Hammer;
 
 public class Reactor extends AbstractActor {
     private int temperature;
     private int damage;
-    private Animation normalAnimation;
-    private Animation redAnimation;
-    private Animation destroyedAnimation;
-    private Animation offAnimation;
+    private final Animation normalAnimation;
+    private final Animation redAnimation;
+    private final Animation destroyedAnimation;
+    private final Animation offAnimation;
+    private final Animation extinguished;
     private boolean state;
     private boolean destroyed;
     private Light light;
@@ -21,6 +27,7 @@ public class Reactor extends AbstractActor {
         this.redAnimation = new Animation("sprites/reactor_hot.png", 80, 80, 0.15f, Animation.PlayMode.LOOP_PINGPONG);
         this.destroyedAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP);
         this.offAnimation = new Animation("sprites/reactor.png");
+        this.extinguished = new Animation("sprites/reactor_extinguished.png");
         setAnimation(offAnimation);
         this.state = false;
         this.light = null;
@@ -54,9 +61,17 @@ public class Reactor extends AbstractActor {
             this.damage = old_damage;
         updateAnimation();
     }
+
+    @Override
+    public void addedToScene(@NotNull Scene scene) {
+        super.addedToScene(scene);
+        new PerpetualReactorHeating(1).scheduleFor(this);
+    }
+
     public void decreaseTemperature(int decrement){
         if(!this.state)
             return;
+
         if(decrement<0)
             return;
         if(this.damage==100)
@@ -66,6 +81,8 @@ public class Reactor extends AbstractActor {
         else
             this.temperature-=Math.ceil(decrement*0.5);
         updateAnimation();
+        if(this.temperature<=0)
+            this.temperature = 0;
     }
     public boolean isRunning(){
         return this.state;
@@ -81,9 +98,9 @@ public class Reactor extends AbstractActor {
     public void extinguishWith(FireExtinguisher fireExt){
         if(fireExt == null || this.damage<=0 || !fireExt.use())
             return;
-        if(this.temperature>4000);
+        if(this.temperature>4000)
             this.temperature= 4000;
-        updateAnimation();
+        setAnimation(extinguished);
     }
     public void repairWith(Hammer hammer){
         int pom = 0;
@@ -102,10 +119,14 @@ public class Reactor extends AbstractActor {
 
     }
     public void addLight(Light light){
+        if(light == null)
+            return;
         this.light = light;
         updateAnimation();
     }
     public void removeLight(){
+        if(light == null)
+            return;
         this.light = null;
         updateAnimation();
     }
@@ -123,8 +144,8 @@ public class Reactor extends AbstractActor {
         float frameRate = 0.15f-(0.12f/100.0f*this.damage);
         if(this.damage>20) {
             //  redAnimation.setFrameDuration();
-            this.normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, frameRate, Animation.PlayMode.LOOP_PINGPONG);
-            this.redAnimation = new Animation("sprites/reactor_hot.png", 80, 80, frameRate, Animation.PlayMode.LOOP_PINGPONG);
+            this.normalAnimation.setFrameDuration(frameRate);
+            this.redAnimation.setFrameDuration(frameRate);
 
         }
         if(this.temperature>4000)
