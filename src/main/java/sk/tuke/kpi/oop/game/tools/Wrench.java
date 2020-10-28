@@ -2,7 +2,7 @@ package sk.tuke.kpi.oop.game.tools;
 
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
-public class Wrench extends BreakableTool {
+public class Wrench extends BreakableTool<Wrench> {
 
 
     public Wrench(){

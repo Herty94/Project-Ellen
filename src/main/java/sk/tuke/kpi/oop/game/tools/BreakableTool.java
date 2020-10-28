@@ -3,7 +3,7 @@ package sk.tuke.kpi.oop.game.tools;
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 
-public abstract class BreakableTool extends AbstractActor implements Usable{
+public abstract class BreakableTool<T extends Wrench,Hammer> extends AbstractActor implements Usable{
     private int remainingUses;
     int getRemainingUses(){
         return this.remainingUses;
@@ -13,7 +13,7 @@ public abstract class BreakableTool extends AbstractActor implements Usable{
     }
 
     @Override
-    public void useWith(Actor actor) {
+    public void useWith() {
         if(this.remainingUses<=0)
             return;
         if(this.remainingUses>0)

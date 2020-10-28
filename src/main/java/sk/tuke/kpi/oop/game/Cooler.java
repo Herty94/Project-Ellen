@@ -34,7 +34,7 @@ public class Cooler extends AbstractActor implements Switchable {
         return this.state;
     }
     private void coolReactor(){
-        if(this.state)
+        if(this.state && reactor!= null)
             reactor.decreaseTemperature(1);
     }
 
