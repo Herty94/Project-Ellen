@@ -10,8 +10,8 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 public class Cooler extends AbstractActor implements Switchable {
 
     private boolean state;
-    private Reactor reactor;
-    private Animation fanAnimation;
+    private final Reactor reactor;
+    private final Animation fanAnimation;
     public Cooler(Reactor reactor){
         this.reactor = reactor;
         fanAnimation = new Animation("sprites/fan.png", 32, 32, 0.1f, Animation.PlayMode.LOOP);

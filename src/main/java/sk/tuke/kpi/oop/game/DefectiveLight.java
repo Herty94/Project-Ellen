@@ -20,7 +20,7 @@ public class DefectiveLight extends Light implements Repairable{
         this.random = 0;
     }
     public void randomLight(){
-        random = (int)(new Random().nextInt())%20;
+        random = (new Random().nextInt())%20;
         if(random==1)
             super.toggle();
     }
