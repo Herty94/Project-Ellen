@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class DefectiveLight extends Light implements Repairable{
     private int random;
-    Disposable disposable;
+    private Disposable disposable;
     public DefectiveLight(){
         this.random = 0;
     }
