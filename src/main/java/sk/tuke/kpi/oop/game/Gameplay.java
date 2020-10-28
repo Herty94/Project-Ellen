@@ -27,7 +27,7 @@ public class Gameplay extends Scenario {
         new When<>(
             () -> reactor.getTemperature() >= 3000,
             new Invoke<>(() ->
-                reactor.repair(hammer))
+                hammer.useWith(reactor))
         ).scheduleFor(reactor);
     }
 }

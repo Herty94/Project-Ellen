@@ -5,9 +5,7 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
-import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
-import sk.tuke.kpi.oop.game.tools.Hammer;
-import sk.tuke.kpi.oop.game.tools.Usable;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -88,30 +86,30 @@ public class Reactor extends AbstractActor implements Switchable,Repairable{
         if(this.temperature<=0)
             this.temperature = 0;
     }
-
+    @Override
     public void turnOff(){
         this.state= false;
         updateAnimation();
     }
+    @Override
     public void turnOn(){
         this.state = true;
         updateAnimation();
     }
-    public boolean extinguish(FireExtinguisher fireExt){
-        if(fireExt == null || this.damage<=0)
+    public boolean extinguish(){
+        if(this.damage<=0)
             return false;
         if(this.temperature>4000)
             this.temperature= 4000;
         setAnimation(extinguished);
-        fireExt.useWith(fireExt);
         return true;
     }
 
 
     @Override
-    public boolean repair(Usable tool){
+    public boolean repair(){
         int pom = 0;
-        if(tool == null || this.damage<=0)
+        if(this.damage<=0)
             return false;
         destroyed = false;
         if(this.damage<=50) {
@@ -123,7 +121,6 @@ public class Reactor extends AbstractActor implements Switchable,Repairable{
             this.damage-=50;
         this.temperature = 4000/100*this.damage+2000-pom;
         updateAnimation();
-        tool.useWith((Hammer) tool);
         return true;
     }
     public void addDevice(EnergyConsumer device){

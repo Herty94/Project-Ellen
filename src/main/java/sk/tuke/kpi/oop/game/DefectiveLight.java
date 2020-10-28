@@ -7,9 +7,7 @@ import sk.tuke.kpi.gamelib.actions.ActionSequence;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
-import sk.tuke.kpi.oop.game.tools.BreakableTool;
-import sk.tuke.kpi.oop.game.tools.Usable;
-import sk.tuke.kpi.oop.game.tools.Wrench;
+
 
 import java.util.Random;
 
@@ -27,8 +25,8 @@ public class DefectiveLight extends Light implements Repairable{
     }
 
     @Override
-    public boolean repair(BreakableTool<Wrench> tool) {
-        if (tool == null&&disposable==null)
+    public boolean repair() {
+        if (disposable==null)
             return false;
         disposable.dispose();
         super.turnOn();
@@ -36,7 +34,6 @@ public class DefectiveLight extends Light implements Repairable{
             new Wait<>(10),
             new Loop<>(new Invoke<>(this::randomLight))
         ).scheduleFor(this);
-        tool.useWith((Wrench)tool);
         return true;
     }
 
