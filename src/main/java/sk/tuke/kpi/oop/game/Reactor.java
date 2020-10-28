@@ -7,8 +7,12 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
 import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
 import sk.tuke.kpi.oop.game.tools.Hammer;
+import sk.tuke.kpi.oop.game.tools.Usable;
 
-public class Reactor extends AbstractActor {
+import java.util.HashSet;
+import java.util.Set;
+
+public class Reactor extends AbstractActor implements Switchable,Repairable{
     private int temperature;
     private int damage;
     private final Animation normalAnimation;
@@ -18,7 +22,7 @@ public class Reactor extends AbstractActor {
     private final Animation extinguished;
     private boolean state;
     private boolean destroyed;
-    private Light light;
+    private Set<EnergyConsumer> devices;
 
     public Reactor(){
         this.temperature = 0;
@@ -30,8 +34,8 @@ public class Reactor extends AbstractActor {
         this.extinguished = new Animation("sprites/reactor_extinguished.png");
         setAnimation(offAnimation);
         this.state = false;
-        this.light = null;
         this.destroyed = false;
+        devices = new HashSet<>();
     }
 
     public int getTemperature() {
@@ -84,9 +88,7 @@ public class Reactor extends AbstractActor {
         if(this.temperature<=0)
             this.temperature = 0;
     }
-    public boolean isRunning(){
-        return this.state;
-    }
+
     public void turnOff(){
         this.state= false;
         updateAnimation();
@@ -95,17 +97,22 @@ public class Reactor extends AbstractActor {
         this.state = true;
         updateAnimation();
     }
-    public void extinguishWith(FireExtinguisher fireExt){
-        if(fireExt == null || this.damage<=0 || !fireExt.use())
-            return;
+    public boolean extinguish(FireExtinguisher fireExt){
+        if(fireExt == null || this.damage<=0)
+            return false;
         if(this.temperature>4000)
             this.temperature= 4000;
         setAnimation(extinguished);
+        fireExt.useWith(fireExt);
+        return true;
     }
-    public void repairWith(Hammer hammer){
+
+
+    @Override
+    public boolean repair(Usable tool){
         int pom = 0;
-        if(hammer == null || this.damage<=0 || !hammer.use())
-            return;
+        if(tool == null || this.damage<=0)
+            return false;
         destroyed = false;
         if(this.damage<=50) {
             pom = 2000/50*(50-this.damage);
@@ -116,31 +123,32 @@ public class Reactor extends AbstractActor {
             this.damage-=50;
         this.temperature = 4000/100*this.damage+2000-pom;
         updateAnimation();
-
+        tool.useWith((Hammer) tool);
+        return true;
     }
-    public void addLight(Light light){
-        if(light == null)
+    public void addDevice(EnergyConsumer device){
+        if(device== null)
             return;
-        this.light = light;
+        this.devices.add(device);
         updateAnimation();
     }
-    public void removeLight(){
-        if(light == null)
+    public void removeDevice(EnergyConsumer device){
+        if(devices == null)
             return;
-        this.light = null;
+        this.devices.remove(device);
         updateAnimation();
     }
     private void updateAnimation(){
         if(!this.state){
             if(!destroyed)
                 setAnimation(offAnimation);
-            if(light != null)
-                light.setElectricityFlow(false);
+            if(devices != null)
+                devices.forEach(energyConsumer -> energyConsumer.setPowered(false));
             return;
         }
         else
-            if(light != null)
-                light.setElectricityFlow(true);
+            if(devices != null)
+                devices.forEach(energyConsumer -> energyConsumer.setPowered(true));
         float frameRate = 0.15f-(0.12f/100.0f*this.damage);
         if(this.damage>20) {
             //  redAnimation.setFrameDuration();
@@ -159,4 +167,6 @@ public class Reactor extends AbstractActor {
         }
 
     }
+
+
 }

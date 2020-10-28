@@ -1,6 +1,7 @@
 plugins {
     java
     application
+    pmd
 }
 
 group = "sk.tuke.kpi.oop"
@@ -27,10 +28,22 @@ dependencies {
     implementation("sk.tuke.kpi.gamelib:gamelib-framework:$gamelibVersion")
     implementation("sk.tuke.kpi.gamelib:gamelib-backend-$backend:$gamelibVersion")
 }
-
+configure<PmdExtension> {
+    toolVersion = "6.18.0"
+    isConsoleOutput = true
+    ruleSets = emptyList()
+    ruleSetFiles = files("src/main/resources/pmd-ruleset.xml")
+}
 tasks {
 
     withType<JavaCompile> {
         options.compilerArgs.plusAssign("-parameters")
     }
+    pmdMain {
+        classpath = sourceSets.main.get().runtimeClasspath
+    }
 }
+
+
+
+

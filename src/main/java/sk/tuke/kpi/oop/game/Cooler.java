@@ -7,7 +7,7 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
-public class Cooler extends AbstractActor {
+public class Cooler extends AbstractActor implements Switchable {
 
     private boolean state;
     private Reactor reactor;
@@ -19,15 +19,17 @@ public class Cooler extends AbstractActor {
         this.state = false;
         fanAnimation.pause();
     }
-
+    @Override
     public void turnOn(){
         fanAnimation.play();
         this.state = true;
     }
+    @Override
     public void turnOff(){
         fanAnimation.pause();
         this.state = false;
     }
+    @Override
     public boolean isOn(){
         return this.state;
     }
