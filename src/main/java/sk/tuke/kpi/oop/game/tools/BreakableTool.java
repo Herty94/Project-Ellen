@@ -12,6 +12,4 @@ public abstract class BreakableTool<A extends Actor> extends AbstractActor imple
         this.remainingUses = remainingUses;
     }
 
-    @Override
-    public abstract void useWith(A actor);
 }

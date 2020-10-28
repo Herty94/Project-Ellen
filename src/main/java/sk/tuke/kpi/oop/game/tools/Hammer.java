@@ -16,14 +16,13 @@ public class Hammer extends BreakableTool<Reactor>{
 
     @Override
     public void useWith(Reactor actor) {
-        if(actor == null)
-            return;
-        if(super.remainingUses<=0)
+
+        if(super.remainingUses<=0||actor!=null)
             return;
 
-            actor.repair();
-            super.remainingUses--;
-
+        if(actor.repair())super.remainingUses--;
+        else
+            return;
         if(super.remainingUses<=0) {
             if(getScene()!=null)
                 (getScene()).removeActor(this);
