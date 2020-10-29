@@ -30,7 +30,7 @@ public class Computer extends AbstractActor implements EnergyConsumer{
     }
     public float sub(float a, float b){
         if(power)
-            return a+b;
+            return a-b;
         return 0f;
 
     }
