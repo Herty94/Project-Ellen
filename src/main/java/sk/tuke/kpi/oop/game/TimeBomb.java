@@ -1,6 +1,6 @@
 package sk.tuke.kpi.oop.game;
 
-import sk.tuke.kpi.gamelib.Actor;
+
 import sk.tuke.kpi.gamelib.actions.ActionSequence;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.actions.Wait;
