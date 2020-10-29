@@ -29,5 +29,6 @@ public class Gameplay extends Scenario {
             new Invoke<>(() ->
                 hammer.useWith(reactor))
         ).scheduleFor(reactor);
+
     }
 }
