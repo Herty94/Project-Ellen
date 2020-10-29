@@ -6,7 +6,7 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Computer extends AbstractActor implements EnergyConsumer{
     private boolean power;
-    private Animation animation;
+    private final Animation animation;
     public Computer(){
         this.power = false;
         animation = new Animation("sprites/computer.png", 240/3, 48, 0.2f, Animation.PlayMode.LOOP);

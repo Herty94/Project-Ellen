@@ -10,19 +10,18 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Helicopter extends AbstractActor {
 
-    private Animation animation;
+
     private Player player;
 
     public Helicopter(){
-        this.animation= new Animation("sprites/heli.png",64,64,0.1f, Animation.PlayMode.LOOP);
-        setAnimation(animation);
+        setAnimation(new Animation("sprites/heli.png",64,64,0.1f, Animation.PlayMode.LOOP));
 
     }
 
 
     public void searchAndDestroy(){
         this.player = (Player)getScene().getFirstActorByName("Player");
-        if(this.player== null)
+        if(this.player == null)
             return;
         new While<>(()-> {
                 if(player.getEnergy()<=0)

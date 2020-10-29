@@ -11,16 +11,14 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 public class TimeBomb extends AbstractActor {
 
     private final float time;
-    private Animation activatedAn;
+    private final Animation activatedAn;
     private boolean activated;
-    private Animation exp;
-    private Animation nonAn;
+    private final Animation exp;
     public TimeBomb(float time){
         this.time = time;
         this.activatedAn = new Animation("sprites/bomb_activated.png", 16, 16, 0.1f, Animation.PlayMode.LOOP);
         this.exp = new Animation("sprites/small_explosion.png", 16, 16, 0.1f, Animation.PlayMode.ONCE);
-        this.nonAn = new Animation("sprites/bomb.png");
-        setAnimation(nonAn);
+        setAnimation(new Animation("sprites/bomb.png"));
         this.activated = false;
     }
     public void activate(){

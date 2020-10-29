@@ -1,5 +1,6 @@
 package sk.tuke.kpi.oop.game.actions;
 
+import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Reactor;
 
@@ -11,9 +12,9 @@ public class PerpetualReactorHeating extends AbstractAction<Reactor> {
 
     @Override
     public void execute(float deltaTime) {
-        if (getActor()==null)
-            return;
-        getActor().increaseTemperature(increment);
+        Reactor reactor = getActor();
+        if (reactor!=null)
+            reactor.increaseTemperature(increment);
     }
 }
 

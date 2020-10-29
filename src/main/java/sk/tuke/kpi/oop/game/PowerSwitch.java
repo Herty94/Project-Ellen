@@ -5,9 +5,9 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.graphics.Color;
 
 public class PowerSwitch extends AbstractActor {
-    private Switchable device;
+    private final Switchable device;
     private boolean state;
-    private Animation animation;
+    private final Animation animation;
     public PowerSwitch(Switchable device){
         this.device = device;
         animation = new Animation("sprites/switch.png");

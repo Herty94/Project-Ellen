@@ -20,7 +20,7 @@ public class Reactor extends AbstractActor implements Switchable,Repairable{
     private final Animation extinguished;
     private boolean state;
     private boolean destroyed;
-    private Set<EnergyConsumer> devices;
+    private final Set<EnergyConsumer> devices;
 
     public Reactor(){
         this.temperature = 0;

@@ -7,8 +7,8 @@ public class Light extends AbstractActor implements Switchable,EnergyConsumer{
 
     private boolean electricity;
     private boolean state;
-    private Animation onLight;
-    private Animation offLight;
+    private final Animation onLight;
+    private final Animation offLight;
 
 
 
