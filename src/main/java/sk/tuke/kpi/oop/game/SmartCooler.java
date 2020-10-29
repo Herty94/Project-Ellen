@@ -27,6 +27,7 @@ public class SmartCooler extends Cooler{
     @Override
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
+        if(reactor!=null)
         new Loop<>(new Invoke<>(this::smartSwitch)).scheduleFor(this);
     }
 

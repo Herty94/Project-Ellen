@@ -22,4 +22,5 @@ public abstract class BreakableTool<A extends Actor> extends AbstractActor imple
                     (getScene()).removeActor(this);
             }
     }
+
 }

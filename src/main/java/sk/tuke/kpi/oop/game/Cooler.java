@@ -19,6 +19,7 @@ public class Cooler extends AbstractActor implements Switchable {
         this.state = false;
         fanAnimation.pause();
     }
+
     @Override
     public void turnOn(){
         fanAnimation.play();
@@ -33,6 +34,7 @@ public class Cooler extends AbstractActor implements Switchable {
     public boolean isOn(){
         return this.state;
     }
+
     private void coolReactor(){
         if(this.state && reactor!= null)
             reactor.decreaseTemperature(1);

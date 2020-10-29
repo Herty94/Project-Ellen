@@ -13,15 +13,25 @@ public class Computer extends AbstractActor implements EnergyConsumer{
         animation.pause();
         setAnimation(animation);
     }
-    public void add(int number){
+    public int add(int a, int b){
+        if(power)
+            return a+b;
+        return 0;
     }
-    public void add(float number) {
-
+    public float add(float a, float b) {
+        if(power)
+            return a+b;
+        return 0f;
     }
-    public void sub(int number){
-
+    public int sub(int a, int b){
+        if(power)
+            return a-b;
+        return 0;
     }
-    public void sub(float number){
+    public float sub(float a, float b){
+        if(power)
+            return a+b;
+        return 0f;
 
     }
     private void updateAnimation(){
