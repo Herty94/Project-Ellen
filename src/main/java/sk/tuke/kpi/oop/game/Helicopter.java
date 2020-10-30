@@ -7,6 +7,8 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.Player;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
+import java.util.Objects;
+
 
 public class Helicopter extends AbstractActor {
 
@@ -20,7 +22,7 @@ public class Helicopter extends AbstractActor {
 
 
     public void searchAndDestroy(){
-        this.player = (Player)getScene().getFirstActorByName("Player");
+        this.player = (Player) Objects.requireNonNull(getScene()).getFirstActorByName("Player");
         if(this.player == null)
             return;
         new While<>(()-> {
@@ -29,12 +31,12 @@ public class Helicopter extends AbstractActor {
                 return true;
         }, new Invoke<>(this::chasePlayer)).scheduleFor(this);
 
-    }
-    private void chasePlayer(){
+        }
+        private void chasePlayer(){
 
         if(this.player== null)
             return;
-        if(intersects(player))
+        if(this.intersects(player))
             player.setEnergy(player.getEnergy()-1);
         int px,py,hx,hy;
         px = player.getPosX();

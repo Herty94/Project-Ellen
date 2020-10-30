@@ -144,18 +144,14 @@ public class Reactor extends AbstractActor implements Switchable,Repairable{
             if(!destroyed)
                 setAnimation(offAnimation);
             if(devices != null)
-                devices.forEach(energyConsumer -> energyConsumer.setPowered(false));
+                devices.forEach(energyConsumer -> energyConsumer.setPowered(this.state));
             return;
         }
-        else
-            if(devices != null)
-                devices.forEach(energyConsumer -> energyConsumer.setPowered(true));
+
         float frameRate = 0.15f-(0.12f/100.0f*this.damage);
         if(this.damage>20) {
-            //  redAnimation.setFrameDuration();
-            this.normalAnimation.setFrameDuration(frameRate);
+            this.normalAnimation.setFrameDuration(frameRate );
             this.redAnimation.setFrameDuration(frameRate);
-
         }
         if(this.temperature>4000)
             setAnimation(this.redAnimation);
@@ -165,8 +161,9 @@ public class Reactor extends AbstractActor implements Switchable,Repairable{
             this.destroyed = true;
             setAnimation(this.destroyedAnimation);
             this.state = false;
-            devices.forEach(energyConsumer -> energyConsumer.setPowered(false));
         }
+        if(devices != null)
+        devices.forEach(energyConsumer -> energyConsumer.setPowered(this.state));
 
     }
 
