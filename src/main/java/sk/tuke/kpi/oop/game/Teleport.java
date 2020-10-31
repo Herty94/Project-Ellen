@@ -40,7 +40,7 @@ public class Teleport extends AbstractActor {
 
         player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2));
         destinationTeleport.setBool(false);
-        //System.out.println(("player <"+player.getPosX()+player.getWidth()/2+" "+player.getPosY()+player.getWidth()/2+">           lifg:<"+destinationTeleport.getPosX()+this.getWidth()/2)+" "+destinationTeleport.getPosY()+this.getWidth()/2);
+        //System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
     }
 
     @Override
