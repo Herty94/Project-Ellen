@@ -11,8 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ChainBomb extends TimeBomb {
-    public final float radius;
-    public final float time;
+    private final float radius;
+    private final float time;
     public ChainBomb(float time){
         super(time);
         this.time = time;
@@ -32,7 +32,8 @@ public class ChainBomb extends TimeBomb {
         Iterator<Actor> it = act.iterator();
         ChainBomb bomb;
         Actor actor;
-        a.setFrame(getPosX()-radius,getPosY()-radius,radius*2,radius*2);
+        a.setFrame((getPosX()+getWidth()/2)-radius,(getPosY()+getWidth()/2)-radius,radius*2,radius*2);
+
         while(it.hasNext()){
             actor = it.next();
             if(actor instanceof ChainBomb && a.contains(actor.getPosX(),actor.getPosY())){

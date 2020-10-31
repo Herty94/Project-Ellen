@@ -33,9 +33,9 @@ public class Teleport extends AbstractActor {
         this.destinationTeleport = destinationTeleport;
         if(disposable!=null)
             disposable.dispose();
-        addedToScene(getScene());
+        addedToScene(getScene()!= null ? getScene() : null);
     }
-    private void teleportPlayer(Player player){
+    public void teleportPlayer(Player player){
 
         player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2));
         destinationTeleport.setBool(false);
