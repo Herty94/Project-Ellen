@@ -28,6 +28,7 @@ public class Teleport extends AbstractActor {
     public Teleport getDestination(){
         return this.destinationTeleport;
     }
+
     public void setDestination(Teleport destinationTeleport){
         if(this!=destinationTeleport)
         this.destinationTeleport = destinationTeleport;
@@ -39,6 +40,7 @@ public class Teleport extends AbstractActor {
 
         player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2));
         destinationTeleport.setBool(false);
+        //System.out.println(("player <"+player.getPosX()+player.getWidth()/2+" "+player.getPosY()+player.getWidth()/2+">           lifg:<"+destinationTeleport.getPosX()+this.getWidth()/2)+" "+destinationTeleport.getPosY()+this.getWidth()/2);
     }
 
     @Override
@@ -52,6 +54,7 @@ public class Teleport extends AbstractActor {
                 )).scheduleFor(player);
     }
     private boolean playerIntersection(){
+
         int px = player.getPosX()+player.getWidth()/2;
         int py = player.getPosY()+ player.getWidth()/2;
 

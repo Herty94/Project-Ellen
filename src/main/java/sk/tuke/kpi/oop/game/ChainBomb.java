@@ -16,7 +16,7 @@ public class ChainBomb extends TimeBomb {
     public ChainBomb(float time){
         super(time);
         this.time = time;
-        radius = 50;
+        radius = 51;
     }
     @Override
     public void activate(){
@@ -32,8 +32,7 @@ public class ChainBomb extends TimeBomb {
         Iterator<Actor> it = act.iterator();
         ChainBomb bomb;
         Actor actor;
-        a.setFrame((getPosX()+getWidth()/2)-radius,(getPosY()+getWidth()/2)-radius,radius*2,radius*2);
-
+        a.setFrame(getPosX()-radius,getPosY()-radius,radius*2,radius*2);
         while(it.hasNext()){
             actor = it.next();
             if(actor instanceof ChainBomb && a.contains(actor.getPosX(),actor.getPosY())){

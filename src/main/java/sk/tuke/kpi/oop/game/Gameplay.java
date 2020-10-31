@@ -29,6 +29,11 @@ public class Gameplay extends Scenario {
             new Invoke<>(() ->
                 hammer.useWith(reactor))
         ).scheduleFor(reactor);
-
+        scene.addActor(new Teleport(null),124,124);
+        scene.addActor(new ChainBomb(10), 150, 150);
+        scene.addActor(new ChainBomb(10), 100, 150);
+        scene.addActor(new ChainBomb(10), 200, 150);
+        scene.addActor(new ChainBomb(10), 150, 100);
+        scene.addActor(new ChainBomb(10), 150, 200);
     }
 }
