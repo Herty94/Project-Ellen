@@ -23,7 +23,7 @@ public class TimeBomb extends AbstractActor {
     }
     public void activate(){
         this.activated = true;
-        setAnimation(activatedAn);
+
         new ActionSequence<>(
             new Wait<>(time),
             new Invoke<>(() -> setAnimation(exp)),
@@ -33,6 +33,7 @@ public class TimeBomb extends AbstractActor {
                 (getScene()).removeActor(this)))
 
         ).scheduleFor(this);
+        setAnimation(activatedAn);
     }
     public boolean isActivated(){
         return this.activated;

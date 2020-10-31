@@ -38,9 +38,10 @@ public class Teleport extends AbstractActor {
     }
     public void teleportPlayer(Player player){
 
-        player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2));
+        if(!this.something) return;
+        player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2)+100);
         destinationTeleport.setBool(false);
-        //System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
+        //System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" width:"+player.getWidth()+" height:"+player.getHeight()+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
     }
 
     @Override
@@ -49,7 +50,7 @@ public class Teleport extends AbstractActor {
         this.player = (Player) Objects.requireNonNull(getScene()).getFirstActorByName("Player");
         if(destinationTeleport !=null)
           disposable = new Loop<>(new When<>(
-                () -> (player!=null&&playerIntersection()&&something),
+                () -> (player!=null&&playerIntersection()),
                 new Invoke<>(this::teleportPlayer)
                 )).scheduleFor(player);
     }

@@ -157,7 +157,7 @@ public class Reactor extends AbstractActor implements Switchable,Repairable{
             setAnimation(this.redAnimation);
         else
             setAnimation(this.normalAnimation);
-        if(this.temperature>=6000) {
+        if(this.temperature>=6000|| this.damage==100) {
             this.destroyed = true;
             setAnimation(this.destroyedAnimation);
             this.state = false;
