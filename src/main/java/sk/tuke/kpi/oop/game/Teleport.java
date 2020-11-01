@@ -9,6 +9,7 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.Player;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
+import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
 public class Teleport extends AbstractActor {
@@ -37,14 +38,13 @@ public class Teleport extends AbstractActor {
     }
     public void teleportPlayer(Player player){
         //System.out.println("haha");
-        //System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" width:"+player.getWidth()+" height:"+player.getHeight()+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
         if(player==null) return;
-        player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2));
-        destinationTeleport.setBool(false);
-        disposable.dispose();
+        player.setPosition(this.getPosX()+8,(int) this.getPosY()+8);
+        this.something=false;
+        //System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" width:"+player.getWidth()+" height:"+player.getHeight()+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
+        if(disposable!=null)
+            disposable.dispose();
         telepot();
-        destinationTeleport.teleportPlayer(null);
-
     }
 
     @Override
@@ -67,11 +67,7 @@ public class Teleport extends AbstractActor {
         if(destinationTeleport !=null)
             disposable = (new When<>(
                 () -> (player!=null&&playerIntersection()&&something),
-                new Invoke<>(this::setPlayer)
+                new Invoke<>(destinationTeleport::teleportPlayer)
             )).scheduleFor(player);
-    }
-    private void setPlayer(Player player){
-        player.setPosition(this.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), this.getPosY()+(this.getWidth()/2)-(player.getWidth()/2));
-        teleportPlayer(player);
     }
 }
