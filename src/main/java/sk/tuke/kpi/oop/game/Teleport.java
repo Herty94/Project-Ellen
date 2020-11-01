@@ -34,25 +34,22 @@ public class Teleport extends AbstractActor {
         this.destinationTeleport = destinationTeleport;
         if(disposable!=null)
             disposable.dispose();
-        addedToScene(getScene()!= null ? getScene() : null);
+        telepot();
     }
     public void teleportPlayer(Player player){
 
-        if(!this.something) return;
-        player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2)+100);
+        System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" width:"+player.getWidth()+" height:"+player.getHeight()+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
+        player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2));
         destinationTeleport.setBool(false);
-        //System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" width:"+player.getWidth()+" height:"+player.getHeight()+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
+        disposable.dispose();
+        telepot();
+
     }
 
     @Override
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
-        this.player = (Player) Objects.requireNonNull(getScene()).getFirstActorByName("Player");
-        if(destinationTeleport !=null)
-          disposable = new Loop<>(new When<>(
-                () -> (player!=null&&playerIntersection()),
-                new Invoke<>(this::teleportPlayer)
-                )).scheduleFor(player);
+        telepot();
     }
     private boolean playerIntersection(){
 
@@ -63,5 +60,13 @@ public class Teleport extends AbstractActor {
                 something = true;
             }
         return px >= this.getPosX() && px <= (this.getPosX() + this.getWidth()) && py >= this.getPosY() && py <= (this.getPosY() + this.getWidth());
+    }
+    private void telepot(){
+        this.player = (Player) Objects.requireNonNull(getScene()).getFirstActorByName("Player");
+        if(destinationTeleport !=null)
+            disposable = (new When<>(
+                () -> (player!=null&&playerIntersection()&&something),
+                new Invoke<>(this::teleportPlayer)
+            )).scheduleFor(player);
     }
 }
