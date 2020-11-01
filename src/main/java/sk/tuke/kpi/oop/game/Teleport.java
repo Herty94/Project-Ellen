@@ -9,7 +9,6 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.Player;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
-import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
 public class Teleport extends AbstractActor {
