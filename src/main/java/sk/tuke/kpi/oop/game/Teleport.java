@@ -38,7 +38,7 @@ public class Teleport extends AbstractActor {
     }
     public void teleportPlayer(Player player){
 
-        System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" width:"+player.getWidth()+" height:"+player.getHeight()+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
+        //System.out.println("player <"+(player.getPosX()+player.getWidth()/2)+" width:"+player.getWidth()+" height:"+player.getHeight()+" "+(player.getPosY()+player.getWidth()/2)+">           lifg:<"+(destinationTeleport.getPosX()+this.getWidth()/2)+" "+(destinationTeleport.getPosY()+this.getWidth()/2));
         player.setPosition(destinationTeleport.getPosX()+(this.getWidth()/2)-(player.getWidth()/2), destinationTeleport.getPosY()+(this.getWidth()/2)-(player.getWidth()/2));
         destinationTeleport.setBool(false);
         disposable.dispose();
