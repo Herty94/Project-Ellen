@@ -28,6 +28,10 @@ public class Move implements Action<Movable> {
         this.actor = getActor();
     }
 
+    public Direction getDirection(){
+        return this.direction;
+    }
+
     @Override
     public @Nullable Movable getActor() {
         return this.actor;
@@ -62,8 +66,7 @@ public class Move implements Action<Movable> {
         }
         actor.setPosition(actor.getPosX()+(direction.getDx()*actor.getSpeed()),actor.getPosY()+(direction.getDy()* actor.getSpeed()));
         this.duration_delta+=deltaTime;
-
-        if((duration_delta-this.duration)>= 1e-5) {
+        if((duration_delta-this.duration) >= 1e-5) {
             this.done = true;
             actor.stoppedMoving();
         }
