@@ -7,7 +7,6 @@ import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.actions.Move;
 
-import javax.swing.*;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -56,6 +55,8 @@ public class MovableController implements KeyboardListener {
                 this.direction=this.direction.combine(direc);
             if(move!=null)
                 move.stop();
+            if(directionSet.isEmpty())
+                return;
             move = new Move(direction,86400);
             move.scheduleFor(actor);
         }

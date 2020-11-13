@@ -7,6 +7,9 @@ import sk.tuke.kpi.gamelib.actions.Action;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 
+import java.util.Collections;
+
+
 public class Move implements Action<Movable> {
 
     private float duration;
