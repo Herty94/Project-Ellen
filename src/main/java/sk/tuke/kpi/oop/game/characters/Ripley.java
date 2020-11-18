@@ -13,6 +13,7 @@ import sk.tuke.kpi.oop.game.items.Energy;
 public class Ripley extends AbstractActor implements Movable, Keeper {
     private int movingSpeed;
     private int energy;
+    private int ammo;
     private Animation animation;
     private Backpack backpack;
     public Ripley(){
@@ -22,6 +23,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper {
         animation.pause();
         this.energy=50;
         setAnimation(animation);
+        this.ammo = 0;
         backpack = new Backpack("Ripley's backpack",10);
     }
 
@@ -36,6 +38,14 @@ public class Ripley extends AbstractActor implements Movable, Keeper {
 
     public int getEnergy() {
         return energy;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
     }
 
     @Override

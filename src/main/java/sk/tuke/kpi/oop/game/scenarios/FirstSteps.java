@@ -6,14 +6,11 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.SceneListener;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.actions.When;
-import sk.tuke.kpi.oop.game.Reactor;
-import sk.tuke.kpi.oop.game.actions.Drop;
-import sk.tuke.kpi.oop.game.actions.Take;
 import sk.tuke.kpi.oop.game.actions.Use;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
-import sk.tuke.kpi.oop.game.items.Backpack;
+import sk.tuke.kpi.oop.game.items.Ammo;
 import sk.tuke.kpi.oop.game.items.Energy;
 import sk.tuke.kpi.oop.game.items.FireExtinguisher;
 import sk.tuke.kpi.oop.game.items.Hammer;
@@ -25,6 +22,8 @@ public class FirstSteps implements SceneListener {
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
         Energy ene = new Energy();
+        Ammo ammo = new Ammo();
+        scene.addActor(ammo,100, 40);
         //Reactor reac = new Reactor();
       //  reac.turnOn();
        // reac.increaseTemperature(6000);
@@ -38,8 +37,12 @@ public class FirstSteps implements SceneListener {
         scene.addActor(fire,50,50);
         scene.getInput().registerListener(new KeeperController(ripley));
         scene.getInput().registerListener(new MovableController(ripley));
-       // ripley.getBackpack().shift();
+        // ripley.getBackpack().shift();
         //new Use<>(ham).scheduleFor(reac);
+        new When<>(
+            () -> ammo.intersects(ripley),
+            new Invoke<>(() ->
+                new Use<>(ammo).scheduleFor(ripley))).scheduleFor(ripley);
         new When<>(
             () -> ene.intersects(ripley),
             new Invoke<>(() ->
@@ -51,6 +54,8 @@ public class FirstSteps implements SceneListener {
         int windowHeight = scene.getGame().getWindowSetup().getHeight();
         int yTextPos = windowHeight - GameApplication.STATUS_LINE_OFFSET*2;
         scene.getGame().getOverlay().drawText("Energy: "+ripley.getEnergy(),15,yTextPos);
+        scene.getGame().getOverlay().drawText("Ammo: "+ripley.getAmmo(),15,yTextPos- GameApplication.STATUS_LINE_OFFSET);
         scene.getGame().pushActorContainer(ripley.getBackpack());
     }
+
 }
