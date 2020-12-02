@@ -11,7 +11,6 @@ import sk.tuke.kpi.oop.game.items.Backpack;
 
 public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
     private int movingSpeed;
-    private int energy;
     private int ammo;
     private boolean dead;
     private Animation animation;
@@ -24,7 +23,6 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
         animation =new Animation("sprites/player.png",32,32,0.1f, Animation.PlayMode.LOOP_PINGPONG);
         animation.pause();
         died = new Animation("sprites/player_die.png",32,32,0.1f, Animation.PlayMode.ONCE);
-        this.energy=100;
         setAnimation(animation);
         this.ammo = 0;
         this.dead=false;
@@ -37,18 +35,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
         return this.backpack;
     }
 
-    public void setEnergy(int energy) {
-        if(energy>0) {
-            this.energy = energy;
-            if (energy > 100)
-                this.energy = 100;
-        }
-        else if(energy==0) {
-                this.energy = energy;
-                this.dead=true;
-                setAnimation(died);
-            }
-    }
+
 
     @Override
     public Health getHealth() {
@@ -83,7 +70,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
         Scene scene = getScene();
         int windowHeight = scene.getGame().getWindowSetup().getHeight();
         int yTextPos = windowHeight - GameApplication.STATUS_LINE_OFFSET*2;
-        scene.getGame().getOverlay().drawText("Energy: "+this.health,15,yTextPos);
+        scene.getGame().getOverlay().drawText("Energy: "+this.health.getValue(),15,yTextPos);
         scene.getGame().getOverlay().drawText("Ammo: "+this.ammo,15,yTextPos- GameApplication.STATUS_LINE_OFFSET);
         scene.getGame().pushActorContainer(this.getBackpack());
     }

@@ -41,7 +41,7 @@ public class MovableController implements KeyboardListener {
             System.out.println(directionSet);
             if(move!=null)
                 move.stop();
-            move = new Move(direction,86400);
+            move = new Move<>(direction,86400);
             move.scheduleFor(actor);
         }
     }
@@ -57,7 +57,7 @@ public class MovableController implements KeyboardListener {
                 move.stop();
             if(directionSet.isEmpty())
                 return;
-            move = new Move(direction,86400);
+            move = new Move<>(direction,86400);
             move.scheduleFor(actor);
         }
     }

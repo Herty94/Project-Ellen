@@ -3,6 +3,7 @@ package sk.tuke.kpi.oop.game.characters;
 public class Health {
     private int max;
     private int value;
+
     public Health(int health, int max){
         this.value=health;
         this.max=max;
@@ -36,6 +37,6 @@ public class Health {
 
 
     public void onExhaustion(ExhaustionEffect effect){
-        
+
     }
 }

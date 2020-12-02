@@ -19,6 +19,7 @@ public class Hammer extends BreakableTool<Repairable> implements Collectible{
         if(actor!=null&&actor.repair())
             super.useWith(actor);
     }
+    @Override
     public Class<Repairable> getUsingActorClass() {
         return Repairable.class;
     }

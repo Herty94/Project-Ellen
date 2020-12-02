@@ -16,7 +16,6 @@ import sk.tuke.kpi.oop.game.items.Usable;
 
 public class KeeperController implements KeyboardListener {
     private Keeper keeper;
-    private Usable<?> actor;
     public KeeperController(Keeper keeper){
         this.keeper = keeper;
     }
@@ -24,11 +23,11 @@ public class KeeperController implements KeyboardListener {
     public void keyPressed(@NotNull Key key) {
 
         switch(key){
-             case ENTER: new Take(keeper.getScene()).scheduleFor(keeper);
+             case ENTER: new Take<>(keeper.getScene()).scheduleFor(keeper);
                 break;
-             case BACKSPACE: new Drop(keeper.getScene()).scheduleFor(keeper);
+             case BACKSPACE: new Drop<>(keeper.getScene()).scheduleFor(keeper);
                 break;
-             case S: new Shift(keeper.getScene()).scheduleFor(keeper);
+             case S: new Shift<>(keeper.getScene()).scheduleFor(keeper);
                 break;
             case U:
                 for(Actor actor : keeper.getScene().getActors())

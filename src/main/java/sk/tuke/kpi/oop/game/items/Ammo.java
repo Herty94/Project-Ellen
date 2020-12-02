@@ -21,6 +21,7 @@ public class Ammo extends AbstractActor implements Usable<Ripley> {
             getScene().removeActor(this);
         }
     }
+    @Override
     public Class<Ripley> getUsingActorClass() {
         return Ripley.class;
     }

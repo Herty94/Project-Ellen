@@ -22,8 +22,6 @@ public class EscapeRoom implements SceneListener {
 
     private Ripley ripley;
 
-    private Disposable move;
-    private Disposable keys;
 
     @Override
     public void sceneCreated(@NotNull Scene scene) {
@@ -37,8 +35,8 @@ public class EscapeRoom implements SceneListener {
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
         ripley = scene.getFirstActorByType(Ripley.class);
-        keys = scene.getInput().registerListener(new KeeperController(ripley));
-        move = scene.getInput().registerListener(new MovableController(ripley));
+         scene.getInput().registerListener(new KeeperController(ripley));
+         scene.getInput().registerListener(new MovableController(ripley));
 
     }
 
