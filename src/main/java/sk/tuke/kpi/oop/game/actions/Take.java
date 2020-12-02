@@ -4,14 +4,13 @@ import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
-import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.items.Collectible;
 
 
 import java.util.List;
 
 
-public class Take extends AbstractAction<Keeper> {
+public class Take<K extends Keeper>  extends AbstractAction<K> {
     private Scene scene;
     private Keeper kep;
 

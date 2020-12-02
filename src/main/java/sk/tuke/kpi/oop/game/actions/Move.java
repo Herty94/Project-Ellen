@@ -8,13 +8,13 @@ import sk.tuke.kpi.oop.game.Movable;
 
 
 
-public class Move implements Action<Movable> {
+public class Move<M extends Movable> implements Action<M> {
 
     private float duration;
     private float duration_delta=0;
     private Direction direction;
     private int x,y;
-    private Movable actor;
+    private M actor;
     private boolean first =false;
     private boolean done =false;
 
@@ -35,12 +35,12 @@ public class Move implements Action<Movable> {
     }
 
     @Override
-    public @Nullable Movable getActor() {
+    public @Nullable M getActor() {
         return this.actor;
     }
 
     @Override
-    public void setActor(@Nullable Movable actor) {
+    public void setActor(@Nullable M actor) {
         this.actor= actor;
     }
 

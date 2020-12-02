@@ -6,7 +6,7 @@ import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.items.Collectible;
 
-public class Drop extends AbstractAction<Keeper> {
+public class Drop<K extends Keeper> extends AbstractAction<K> {
 
     private Scene scene;
 

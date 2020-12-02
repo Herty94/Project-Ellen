@@ -6,7 +6,7 @@ import sk.tuke.kpi.oop.game.Keeper;
 
 
 
-public class Shift extends AbstractAction<Keeper> {
+public class Shift<K extends Keeper> extends AbstractAction<K> {
 
     private Scene scene;
 
