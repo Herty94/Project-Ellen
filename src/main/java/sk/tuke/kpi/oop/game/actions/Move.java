@@ -1,13 +1,11 @@
 package sk.tuke.kpi.oop.game.actions;
 
-import org.jetbrains.annotations.NotNull;
+
 import org.jetbrains.annotations.Nullable;
-import sk.tuke.kpi.gamelib.Disposable;
 import sk.tuke.kpi.gamelib.actions.Action;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 
-import java.util.Collections;
 
 
 public class Move implements Action<Movable> {
@@ -15,6 +13,7 @@ public class Move implements Action<Movable> {
     private float duration;
     private float duration_delta=0;
     private Direction direction;
+    private int x,y;
     private Movable actor;
     private boolean first =false;
     private boolean done =false;
@@ -67,7 +66,11 @@ public class Move implements Action<Movable> {
             actor.startedMoving(direction);
             this.first = false;
         }
-        actor.setPosition(actor.getPosX()+(direction.getDx()*actor.getSpeed()),actor.getPosY()+(direction.getDy()* actor.getSpeed()));
+        x=actor.getPosX();
+        y= actor.getPosY();
+        actor.setPosition(x+(direction.getDx()*actor.getSpeed()),y+(direction.getDy()* actor.getSpeed()));
+        if(actor.getScene().getMap().intersectsWithWall(actor))
+            actor.setPosition(x,y);
         this.duration_delta+=deltaTime;
         if((duration_delta-this.duration) >= 1e-5) {
             this.done = true;

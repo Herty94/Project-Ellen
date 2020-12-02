@@ -4,7 +4,7 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
 
-import java.awt.event.ActionEvent;
+
 
 public class Shift extends AbstractAction<Keeper> {
 

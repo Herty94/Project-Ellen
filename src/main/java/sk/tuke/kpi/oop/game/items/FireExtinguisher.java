@@ -13,6 +13,11 @@ public class FireExtinguisher extends BreakableTool<Reactor> implements Collecti
     }
 
     @Override
+    public Class<Reactor> getUsingActorClass() {
+        return Reactor.class;
+    }
+
+    @Override
     public void useWith(Reactor actor) {
         if(actor!=null&&actor.extinguish())
             super.useWith(actor);

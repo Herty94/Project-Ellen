@@ -1,9 +1,9 @@
 package sk.tuke.kpi.oop.game;
 
-import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.gamelib.backends.lwjgl.LwjglBackend;
-import sk.tuke.kpi.oop.game.scenarios.FirstSteps;
+import sk.tuke.kpi.oop.game.scenarios.EscapeRoom;
+
 
 
 public class Main {
@@ -17,13 +17,13 @@ public class Main {
 
         // vytvorenie sceny pre hru
         // pouzijeme implementaciu rozhrania `Scene` triedou `World`
-        Scene scene = new World("world");
+        Scene scene = new World("world","maps/escape-room.tmx", new EscapeRoom.Factory());
 
         // pridanie sceny do hry
         game.addScene(scene);
 
-        FirstSteps first = new FirstSteps();
-        scene.addListener(first);
+
+        scene.addListener(new EscapeRoom());
 
         // spustenie hry
         game.start();

@@ -18,10 +18,18 @@ public class Drop extends AbstractAction<Keeper> {
     public void execute(float deltaTime) {
         Keeper kep = getActor();
         Collectible col = kep.getBackpack().peek();
-        if(col==null)
-            return;
-        kep.getBackpack().remove(col);
-        scene.addActor(col,kep.getPosX()+8,kep.getPosY()+8);
+        if(col==null){
+            setDone(true);
+        }
+
+
+        System.out.println("hfdsafaha");
+        try {
+            kep.getBackpack().remove(col);
+            scene.addActor(col, kep.getPosX() + 8, kep.getPosY() + 8);
+        }catch (Exception ex) {
+            scene.getGame().getOverlay().drawText(ex.getMessage(), 100, 100).showFor(2);
+        }
         setDone(true);
     }
 }

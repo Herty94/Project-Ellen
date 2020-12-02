@@ -7,7 +7,7 @@ import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.items.Collectible;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -32,7 +32,6 @@ public class Take extends AbstractAction<Keeper> {
 
         if(col==null)
             return;
-        System.out.println("hsdhfa");
         try {
             kep.getBackpack().add(col);
         } catch (Exception ex) {

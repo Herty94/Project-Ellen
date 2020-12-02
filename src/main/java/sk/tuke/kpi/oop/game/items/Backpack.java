@@ -2,7 +2,6 @@ package sk.tuke.kpi.oop.game.items;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.ActorContainer;
 
 import java.util.ArrayList;
@@ -34,7 +33,9 @@ public class Backpack implements ActorContainer<Collectible> {
 
     @Override
     public int getSize() {
-        return 0;
+        if(collectible==null)
+            return 0;
+        return collectible.size();
     }
 
     @Override
@@ -66,7 +67,7 @@ public class Backpack implements ActorContainer<Collectible> {
 
     @Override
     public void shift() {
-        Collections.swap(collectible,0,collectible.size()-1);
+            Collections.rotate(collectible,1);
     }
 
     @NotNull
