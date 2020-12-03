@@ -17,6 +17,7 @@ public class Move<M extends Movable> implements Action<M> {
     private boolean first =true;
     private boolean done =false;
 
+
     public Move(Direction direction, float duration) {
         this.direction=direction;
         this.duration=duration;
@@ -28,6 +29,7 @@ public class Move<M extends Movable> implements Action<M> {
         this.duration=0;
         this.actor = getActor();
     }
+
 
     public Direction getDirection(){
         return this.direction;
@@ -70,8 +72,11 @@ public class Move<M extends Movable> implements Action<M> {
         x=actor.getPosX();
         y= actor.getPosY();
         actor.setPosition(x+(direction.getDx()*actor.getSpeed()),y+(direction.getDy()* actor.getSpeed()));
-        if(actor.getScene().getMap().intersectsWithWall(actor))
+        if(actor.getScene().getMap().intersectsWithWall(actor)){
             actor.setPosition(x,y);
+            actor.collidedWithWall();
+        }
+
         this.duration_delta+=deltaTime;
         if((duration_delta-this.duration) >= 1e-5) {
             this.done = true;

@@ -31,6 +31,11 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
     }
 
     @Override
+    public void collidedWithWall() {
+
+    }
+
+    @Override
     public Backpack getBackpack() {
         return this.backpack;
     }
