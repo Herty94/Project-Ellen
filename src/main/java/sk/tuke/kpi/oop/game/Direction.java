@@ -2,13 +2,13 @@ package sk.tuke.kpi.oop.game;
 
 public enum Direction {
     NORTH(0,1),
-    NORTH_EAST(1,1),
+    NORTHEAST(1,1),
     EAST(1,0),
-    SOUTH_EAST(1,-1),
+    SOUTHEAST(1,-1),
     SOUTH(0,-1),
-    SOUTH_WEST(-1,-1),
+    SOUTHWEST(-1,-1),
     WEST(-1,0),
-    NORTH_WEST(-1,1),
+    NORTHWEST(-1,1),
     NONE(0,0);
 
     private final int dx;
@@ -20,7 +20,7 @@ public enum Direction {
     public float getAngle(){
         float degreX=0f;
         float degreY=0f;
-        if(this.equals(SOUTH_WEST))
+        if(this.equals(SOUTHWEST))
             return 135f;
         if(dx!=0)
             degreX = (float)Math.toDegrees(Math.asin(dx));

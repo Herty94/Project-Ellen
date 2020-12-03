@@ -37,8 +37,8 @@ public class MovableController implements KeyboardListener {
             for (Direction direc : directionSet)
                 this.direction=this.direction.combine(direc);
 
-            System.out.println(direction.getDx()+" "+direction.getDy());
-            System.out.println(directionSet);
+
+            System.out.println(direction);
             if(move!=null)
                 move.stop();
             move = new Move<>(direction,86400);

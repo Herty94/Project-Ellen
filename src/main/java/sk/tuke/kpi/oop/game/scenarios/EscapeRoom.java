@@ -79,6 +79,6 @@ public class EscapeRoom implements SceneListener {
 
         Move<Movable> move  =  new Move<>(Direction.EAST,10);
 
-        return move.scheduleFor((Alien)actor);
+        return move.scheduleFor(actor);
     }
 }

@@ -22,13 +22,11 @@ public class Move<M extends Movable> implements Action<M> {
     public Move(Direction direction, float duration) {
         this.direction=direction;
         this.duration=duration;
-        this.actor = getActor();
         // implementacia konstruktora akcie
     }
     public Move(Direction direction){
         this.direction = direction;
         this.duration=0;
-        this.actor = getActor();
     }
 
 
@@ -65,6 +63,7 @@ public class Move<M extends Movable> implements Action<M> {
 
     @Override
     public void execute(float deltaTime) {
+        actor=Objects.requireNonNull(getActor());
         if(this.first) {
             actor.startedMoving(direction);
             this.first = false;
