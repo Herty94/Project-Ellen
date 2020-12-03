@@ -6,6 +6,7 @@ import sk.tuke.kpi.gamelib.actions.Action;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 
+import java.util.Objects;
 
 
 public class Move<M extends Movable> implements Action<M> {
@@ -58,7 +59,7 @@ public class Move<M extends Movable> implements Action<M> {
     }
 
     public void stop(){
-        actor.stoppedMoving();
+        Objects.requireNonNull(actor).stoppedMoving();
         this.done = true;
     }
 
@@ -80,7 +81,10 @@ public class Move<M extends Movable> implements Action<M> {
         this.duration_delta+=deltaTime;
         if((duration_delta-this.duration) >= 1e-5) {
             this.done = true;
-            actor.stoppedMoving();
+            if(first ==false) {
+                actor.stoppedMoving();
+                first=true;
+            }
         }
 
     }
