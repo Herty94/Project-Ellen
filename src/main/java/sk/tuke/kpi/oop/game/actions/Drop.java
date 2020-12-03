@@ -8,7 +8,7 @@ import sk.tuke.kpi.oop.game.items.Collectible;
 
 public class Drop<K extends Keeper> extends AbstractAction<K> {
 
-    private Scene scene;
+    private final Scene scene;
 
     public Drop(Scene scene){
         this.scene = scene;

@@ -41,10 +41,9 @@ public enum Direction {
     }
 
     public Direction combine(Direction other){
-        int x=0;
-        int y=0;
-        x=this.dx+other.getDx();
-        y=this.dy+other.getDy();
+
+        int x=this.dx+other.getDx();
+        int y=this.dy+other.getDy();
         for(Direction direc : Direction.values())
             if(direc.getDx()==x && direc.getDy() ==y)
                 return direc;

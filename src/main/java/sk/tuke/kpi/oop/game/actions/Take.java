@@ -11,12 +11,11 @@ import java.util.List;
 
 
 public class Take<K extends Keeper>  extends AbstractAction<K> {
-    private Scene scene;
+    private final Scene scene;
     private Keeper kep;
 
     public Take(Scene scene){
         this.scene = scene;
-        this.kep = null;
     }
     @Override
     public void execute(float deltaTime) {

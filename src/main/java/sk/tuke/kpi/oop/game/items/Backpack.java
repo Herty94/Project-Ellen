@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Backpack implements ActorContainer<Collectible> {
 
-    private String name;
-    private int capacity;
+    private final String name;
+    private final int capacity;
     private List<Collectible> collectible;
 
     public Backpack(String name, int capacity){

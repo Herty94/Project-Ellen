@@ -10,13 +10,13 @@ import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.items.Backpack;
 
 public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
-    private int movingSpeed;
+    private final int movingSpeed;
     private int ammo;
-    private boolean dead;
-    private Animation animation;
-    private Animation died;
-    private Backpack backpack;
-    private Health health;
+    private final boolean dead;
+    private final Animation animation;
+    private final Animation died;
+    private final Backpack backpack;
+    private final Health health;
     public Ripley(){
         super("Ellen");
         this.movingSpeed = 2;

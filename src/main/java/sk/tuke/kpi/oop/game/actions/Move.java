@@ -10,9 +10,9 @@ import sk.tuke.kpi.oop.game.Movable;
 
 public class Move<M extends Movable> implements Action<M> {
 
-    private float duration;
+    private final float duration;
     private float duration_delta=0;
-    private Direction direction;
+    private final Direction direction;
     private int x,y;
     private M actor;
     private boolean first =false;

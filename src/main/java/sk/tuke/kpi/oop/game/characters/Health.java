@@ -1,7 +1,7 @@
 package sk.tuke.kpi.oop.game.characters;
 
 public class Health {
-    private int max;
+    private final int max;
     private int value;
 
     public Health(int health, int max){

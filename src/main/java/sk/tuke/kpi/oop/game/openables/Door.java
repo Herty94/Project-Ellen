@@ -16,7 +16,7 @@ import static sk.tuke.kpi.gamelib.map.MapTile.Type.WALL;
 
 public class Door extends AbstractActor implements Openable, Usable<Actor> {
     private boolean opened;
-    private Animation anim;
+    private final Animation anim;
     private MapTile upper;
     private MapTile bottom;
     public static final Topic<Door> DOOR_OPENED = Topic.create("door opened", Door.class);

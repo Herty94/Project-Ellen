@@ -7,7 +7,7 @@ import sk.tuke.kpi.oop.game.Movable;
 
 public class Alien extends AbstractActor implements Movable {
 
-    private Animation anim;
+    private final Animation anim;
     public Alien(){
         anim = new Animation("sprites/alien.png",32,32,0.1f, Animation.PlayMode.LOOP);
         setAnimation(anim);

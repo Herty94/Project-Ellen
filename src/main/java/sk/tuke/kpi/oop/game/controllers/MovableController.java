@@ -20,7 +20,7 @@ public class MovableController implements KeyboardListener {
         Map.entry(Input.Key.LEFT, Direction.WEST)
         // dalsie zaznamy zobrazenia prekladu ...
     );
-    private Move move;
+    private Move<Movable> move;
     private Direction direction;
     private Set<Direction> directionSet;
     public MovableController(Movable actor){
