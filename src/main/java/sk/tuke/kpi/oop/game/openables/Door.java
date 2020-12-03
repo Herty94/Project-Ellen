@@ -1,6 +1,8 @@
 package sk.tuke.kpi.oop.game.openables;
 
+import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Actor;
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.map.MapTile;
@@ -28,6 +30,15 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
         setAnimation(anim);
         this.opened = false;
 
+    }
+
+    @Override
+    public void addedToScene(@NotNull Scene scene) {
+        super.addedToScene(scene);
+        System.out.println(this.getPosX()/16);
+        upper = scene.getMap().getTile(this.getPosX()/16,(this.getPosY()+16)/16);
+        bottom = scene.getMap().getTile(this.getPosX()/16,this.getPosY()/16);
+        setWall(WALL);
     }
 
     @Override
@@ -60,14 +71,6 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
     @Override
     public boolean isOpen() {
         return this.opened;
-    }
-    public void setTiles(){
-        if(getScene()==null)
-            return;
-        System.out.println(this.getPosX()/16);
-        upper = getScene().getMap().getTile(this.getPosX()/16,(this.getPosY()+16)/16);
-        bottom = getScene().getMap().getTile(this.getPosX()/16,this.getPosY()/16);
-        setWall(WALL);
     }
     private void setWall(MapTile.Type a){
             bottom.setType(a);

@@ -73,6 +73,7 @@ public class Move<M extends Movable> implements Action<M> {
             actor.setPosition(x,y);
         this.duration_delta+=deltaTime;
         if((duration_delta-this.duration) >= 1e-5) {
+            System.out.print("hhh");
             this.done = true;
             actor.stoppedMoving();
         }

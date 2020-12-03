@@ -53,12 +53,7 @@ public class MissionImpossible implements SceneListener {
         move = scene.getInput().registerListener(new MovableController(ripley));
 
 
-        //usable picking
-        for(Actor actor : scene.getActors()) {
-            if(actor instanceof Door) {
-                ((Door) actor).setTiles();
-            }
-        }
+
     }
 
     @Override

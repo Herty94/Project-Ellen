@@ -77,7 +77,7 @@ public class EscapeRoom implements SceneListener {
     }
     private Disposable randomMove(Movable actor){
 
-        Move move  =  new Move(Direction.EAST,10);
+        Move<Movable> move  =  new Move<>(Direction.EAST,10);
 
         return move.scheduleFor((Alien)actor);
     }
