@@ -8,17 +8,20 @@ import sk.tuke.kpi.oop.game.items.Collectible;
 
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class Take<K extends Keeper>  extends AbstractAction<K> {
-    private final Scene scene;
-    private Keeper kep;
+    private Scene scene;
+    private K kep;
 
-    public Take(Scene scene){
-        this.scene = scene;
+    public Take(){
+
     }
     @Override
     public void execute(float deltaTime) {
+        if(scene==null)
+            this.scene = Objects.requireNonNull(getActor().getScene());
         kep = getActor();
         List<Actor> list = scene.getActors();
         Collectible col = null;

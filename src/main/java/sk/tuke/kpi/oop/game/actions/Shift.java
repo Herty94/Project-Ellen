@@ -4,18 +4,21 @@ import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
 
+import java.util.Objects;
 
 
 public class Shift<K extends Keeper> extends AbstractAction<K> {
 
-    private final Scene scene;
+    private Scene scene;
 
-    public Shift(Scene scene){
-        this.scene = scene;
+    public Shift(){
+
     }
 
     @Override
     public void execute(float deltaTime) {
+        if(scene==null)
+        this.scene = Objects.requireNonNull(getActor().getScene());
         try {
             getActor().getBackpack().shift();
         }catch(Exception ex){

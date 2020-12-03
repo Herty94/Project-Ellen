@@ -13,9 +13,8 @@ public class Move<M extends Movable> implements Action<M> {
     private final float duration;
     private float duration_delta=0;
     private final Direction direction;
-    private int x,y;
     private M actor;
-    private boolean first =false;
+    private boolean first =true;
     private boolean done =false;
 
     public Move(Direction direction, float duration) {
@@ -57,15 +56,17 @@ public class Move<M extends Movable> implements Action<M> {
     }
 
     public void stop(){
-        this.duration_delta=this.duration+1f;
+        actor.stoppedMoving();
+        this.done = true;
     }
 
     @Override
     public void execute(float deltaTime) {
-        if(!this.first) {
+        if(this.first) {
             actor.startedMoving(direction);
             this.first = false;
         }
+        int x,y;
         x=actor.getPosX();
         y= actor.getPosY();
         actor.setPosition(x+(direction.getDx()*actor.getSpeed()),y+(direction.getDy()* actor.getSpeed()));
@@ -73,7 +74,6 @@ public class Move<M extends Movable> implements Action<M> {
             actor.setPosition(x,y);
         this.duration_delta+=deltaTime;
         if((duration_delta-this.duration) >= 1e-5) {
-            System.out.print("hhh");
             this.done = true;
             actor.stoppedMoving();
         }

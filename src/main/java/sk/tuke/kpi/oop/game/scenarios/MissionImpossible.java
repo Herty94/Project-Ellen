@@ -19,8 +19,8 @@ import sk.tuke.kpi.oop.game.openables.LockedDoor;
 
 public class MissionImpossible implements SceneListener {
     private Ripley ripley;
-    private long time = 0;
-    private boolean contamine=false;
+    private long time;
+    private boolean contamine;
     private Disposable move;
     private Disposable keys;
     public static class Factory implements ActorFactory {
@@ -48,6 +48,8 @@ public class MissionImpossible implements SceneListener {
     }
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
+        this.contamine=false;
+        this.time =0;
         ripley = scene.getFirstActorByType(Ripley.class);
         keys = scene.getInput().registerListener(new KeeperController(ripley));
         move = scene.getInput().registerListener(new MovableController(ripley));

@@ -23,16 +23,18 @@ public class KeeperController implements KeyboardListener {
     public void keyPressed(@NotNull Key key) {
 
         switch(key){
-             case ENTER: new Take<>(keeper.getScene()).scheduleFor(keeper);
+             case ENTER: new Take<>().scheduleFor(keeper);
                 break;
-             case BACKSPACE: new Drop<>(keeper.getScene()).scheduleFor(keeper);
+             case BACKSPACE: new Drop<>().scheduleFor(keeper);
                 break;
-             case S: new Shift<>(keeper.getScene()).scheduleFor(keeper);
+             case S: new Shift<>().scheduleFor(keeper);
                 break;
             case U:
                 for(Actor actor : keeper.getScene().getActors())
-                    if(actor instanceof Usable<?>&& actor.intersects(keeper))
-                        new Use<>((Usable<?>)actor).scheduleForIntersectingWith(keeper);
+                    if(actor instanceof Usable<?>&& actor.intersects(keeper)) {
+                        new Use<>((Usable<?>) actor).scheduleForIntersectingWith(keeper);
+                        break;
+                    }
                 break;
             case B:
                         new Use<>((Usable<?>) keeper.getBackpack().peek()).scheduleForIntersectingWith(keeper);
