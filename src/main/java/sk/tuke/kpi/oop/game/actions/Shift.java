@@ -17,7 +17,7 @@ public class Shift<K extends Keeper> extends AbstractAction<K> {
 
     @Override
     public void execute(float deltaTime) {
-        if(getActor().getScene()==null) {
+        if(getActor()==null || getActor().getScene()==null) {
             setDone(true);
             return;
         }

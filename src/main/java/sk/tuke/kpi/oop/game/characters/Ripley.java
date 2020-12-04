@@ -32,10 +32,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive ,Arm
         backpack = new Backpack("Ripley's backpack",10);
         health = new Health(100);
         weapon =new Gun(10,100);
-        health.onExhaustion(() -> {
-            setAnimation(died);
-
-        });
+        health.onExhaustion(() -> setAnimation(died));
 
     }
 
@@ -86,7 +83,8 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive ,Arm
 
     @Override
     public void stoppedMoving() {
-        animation.pause();
+        animation.stop();
+        System.out.println("stoped");
     }
     public void showRipleyState(){
         Scene scene = getScene();

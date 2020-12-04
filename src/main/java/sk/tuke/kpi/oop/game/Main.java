@@ -3,7 +3,6 @@ package sk.tuke.kpi.oop.game;
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.gamelib.backends.lwjgl.LwjglBackend;
 import sk.tuke.kpi.oop.game.scenarios.EscapeRoom;
-import sk.tuke.kpi.oop.game.scenarios.MissionImpossible;
 
 
 public class Main {

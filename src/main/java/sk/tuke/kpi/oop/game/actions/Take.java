@@ -15,12 +15,11 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
     private Scene scene;
     private K kep;
 
-    public Take(K kep){
-        this.kep=kep;
+    public Take(){
     }
     @Override
     public void execute(float deltaTime) {
-        if(getActor().getScene()==null) {
+        if(getActor()==null||getActor().getScene()==null) {
             setDone(true);
             return;
         }
@@ -32,11 +31,14 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
         for (Actor s : list) {
             if ((kep.intersects(s) && s instanceof Collectible)) {
                 col = (Collectible)s;
+                break;
             }
         }
 
-        if(col==null)
+        if(col==null) {
+            setDone(true);
             return;
+        }
         try {
             kep.getBackpack().add(col);
         } catch (Exception ex) {

@@ -13,7 +13,7 @@ public class Backpack implements ActorContainer<Collectible> {
 
     private final String name;
     private final int capacity;
-    private List<Collectible> collectible;
+    private final List<Collectible> collectible;
 
     public Backpack(String name, int capacity){
         this.name= name;
@@ -53,8 +53,7 @@ public class Backpack implements ActorContainer<Collectible> {
 
     @Override
     public void remove(@NotNull Collectible actor) {
-        if(actor==null)
-            return;
+
         collectible.remove(actor);
     }
 

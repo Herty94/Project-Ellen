@@ -41,7 +41,7 @@ public class Health {
     }
     public void exhaust(){
         this.value = 0;
-        list.forEach(l -> l.apply());
+        list.forEach(ExhaustionEffect::apply);
     }
 
     public void onExhaustion(ExhaustionEffect effect){

@@ -3,7 +3,7 @@ package sk.tuke.kpi.oop.game.characters;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class AlienMother extends Alien {
-    private Health health;
+    private final Health health;
 
     public AlienMother(){
         health=new Health(200);

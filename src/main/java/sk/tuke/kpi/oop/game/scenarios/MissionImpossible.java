@@ -24,7 +24,6 @@ public class MissionImpossible implements SceneListener {
     private Disposable move;
     private Disposable keys;
     public static class Factory implements ActorFactory {
-
         @Override
         public @Nullable Actor create(@Nullable String type, @Nullable String name) {
             switch(name){
@@ -54,18 +53,12 @@ public class MissionImpossible implements SceneListener {
         keys = scene.getInput().registerListener(new KeeperController(ripley));
         move = scene.getInput().registerListener(new MovableController(ripley));
 
-
-
     }
 
     @Override
     public void sceneUpdating(@NotNull Scene scene) {
-        scene.getMessageBus().subscribe(Door.DOOR_OPENED, door -> {
-            contamine = true;
-        } );
-        scene.getMessageBus().subscribe(Ventilator.VENTILATOR_REPAIRED, vent -> {
-                contamine = false;
-        } );
+        scene.getMessageBus().subscribe(Door.DOOR_OPENED, door -> contamine = true);
+        scene.getMessageBus().subscribe(Ventilator.VENTILATOR_REPAIRED, vent -> contamine = false);
         if(contamine&&time%10==0)
             ripley.getHealth().drain(1);
         time++;

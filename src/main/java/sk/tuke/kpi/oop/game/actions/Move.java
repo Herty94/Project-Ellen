@@ -12,16 +12,19 @@ import java.util.Objects;
 public class Move<M extends Movable> implements Action<M> {
 
     private final float duration;
-    private float duration_delta=0;
+    private float duration_delta;
     private final Direction direction;
     private M actor;
-    private boolean first =true;
-    private boolean done =false;
+    private boolean first;
+    private boolean done;
 
 
     public Move(Direction direction, float duration) {
         this.direction=direction;
         this.duration=duration;
+        this.duration_delta=0;
+        this.done=false;
+        this.first = true;
         // implementacia konstruktora akcie
     }
     public Move(Direction direction){
@@ -65,6 +68,10 @@ public class Move<M extends Movable> implements Action<M> {
 
     @Override
     public void execute(float deltaTime) {
+        if(direction == Direction.NONE){
+            stop();
+            return;
+        }
         actor=Objects.requireNonNull(getActor());
         if(this.first) {
             actor.startedMoving(direction);
@@ -82,7 +89,7 @@ public class Move<M extends Movable> implements Action<M> {
         this.duration_delta+=deltaTime;
         if((duration_delta-this.duration) >= 1e-5) {
             stop();
-
+            return;
         }
 
     }

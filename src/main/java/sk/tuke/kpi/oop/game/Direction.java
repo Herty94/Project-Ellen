@@ -51,15 +51,17 @@ public enum Direction {
 
     }
     public static Direction fromAngle(float angle){
+        System.out.println("angle is this: "+angle);
         switch((int) angle){
+            case 360:
             case 0: return Direction.NORTH;
-            case 90: return Direction.EAST;
-            case 270: return Direction.WEST;
-            case 180: return Direction.SOUTH;
-            case 45: return Direction.NORTHEAST;
-            case 315: return Direction.NORTHWEST;
-            case 135: return Direction.SOUTHEAST;
-            case 225: return Direction.SOUTHWEST;
+            case 270: return Direction.EAST;
+            case 450: return Direction.WEST;
+            case 540: return Direction.SOUTH;
+            case 315: return Direction.NORTHEAST;
+            case 405: return Direction.NORTHWEST;
+            case 495: return Direction.SOUTHEAST;
+            case 585: return Direction.SOUTHWEST;
             default: return Direction.NONE;
         }
 

@@ -3,10 +3,7 @@ package sk.tuke.kpi.oop.game.scenarios;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.*;
-import sk.tuke.kpi.oop.game.Direction;
-import sk.tuke.kpi.oop.game.Locker;
-import sk.tuke.kpi.oop.game.Movable;
-import sk.tuke.kpi.oop.game.Ventilator;
+import sk.tuke.kpi.oop.game.*;
 import sk.tuke.kpi.oop.game.actions.Move;
 import sk.tuke.kpi.oop.game.characters.Alien;
 import sk.tuke.kpi.oop.game.characters.AlienMother;
@@ -23,7 +20,9 @@ public class EscapeRoom implements SceneListener {
 
 
     private Ripley ripley;
-
+    private Disposable shoot;
+    private Disposable move;
+    private Disposable use;
 
     @Override
     public void sceneCreated(@NotNull Scene scene) {
@@ -36,17 +35,21 @@ public class EscapeRoom implements SceneListener {
 
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
-        ripley = scene.getFirstActorByType(Ripley.class);
-         scene.getInput().registerListener(new KeeperController(ripley));
-         scene.getInput().registerListener(new MovableController(ripley));
-         scene.getInput().registerListener(new ShooterController(ripley));
+         ripley = scene.getFirstActorByType(Ripley.class);
+         use = scene.getInput().registerListener(new KeeperController(ripley));
+         move =scene.getInput().registerListener(new MovableController(ripley));
+         shoot = scene.getInput().registerListener(new ShooterController(ripley));
     }
 
     @Override
     public void sceneUpdating(@NotNull Scene scene) {
         ripley.showRipleyState();
-        if(ripley.getHealth().getValue()==0)
+        if(ripley.getHealth().getValue()==0) {
             scene.cancelActions(ripley);
+            use.dispose();
+            move.dispose();
+            shoot.dispose();
+        }
         scene.follow(ripley);
     }
 
