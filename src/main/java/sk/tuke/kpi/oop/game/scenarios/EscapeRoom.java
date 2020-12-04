@@ -39,6 +39,7 @@ public class EscapeRoom implements SceneListener {
          use = scene.getInput().registerListener(new KeeperController(ripley));
          move =scene.getInput().registerListener(new MovableController(ripley));
          shoot = scene.getInput().registerListener(new ShooterController(ripley));
+         System.out.println("bla : "+Direction.NORTHWEST.combine(Direction.WEST));
     }
 
     @Override
