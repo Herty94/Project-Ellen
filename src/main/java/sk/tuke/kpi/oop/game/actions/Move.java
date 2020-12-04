@@ -60,14 +60,18 @@ public class Move<M extends Movable> implements Action<M> {
     }
 
     public void stop(){
-        if(actor!=null){
+        if(actor!=null&&!this.first){
             Objects.requireNonNull(actor).stoppedMoving();
+            first = true;
         }
         this.done = true;
+
     }
 
     @Override
     public void execute(float deltaTime) {
+        if(done)
+            return;
         if(direction == Direction.NONE){
             stop();
             return;

@@ -31,15 +31,16 @@ import java.util.Set;
 
         @Override
         public void keyPressed(@NotNull Key key) {
-            if(move!=null)
-                move.stop();
+
             if(keyDirectionMap.containsKey(key)) {
                 this.directionSet.add(keyDirectionMap.get(key));
                 this.direction=Direction.NONE;
                 for (Direction direc : directionSet)
                     this.direction=this.direction.combine(direc);
                 System.out.println(direction);
-
+                if(move!=null)
+                    move.stop();
+                System.out.println("pressed "+directionSet);
                 move = new Move<>(direction,86400);
                 move.scheduleFor(actor);
             }
@@ -52,10 +53,12 @@ import java.util.Set;
                 this.direction=Direction.NONE;
                 for (Direction direc : directionSet)
                     this.direction=this.direction.combine(direc);
+
                 if(move!=null)
                     move.stop();
                 if(directionSet.isEmpty())
                     return;
+                System.out.println("release "+directionSet);
                 move = new Move<>(direction,86400);
                 move.scheduleFor(actor);
             }

@@ -37,8 +37,9 @@ configure<PmdExtension> {
 tasks {
 
     withType<JavaCompile> {
-        options.compilerArgs.plusAssign("-parameters")
+        options.compilerArgs.addAll(listOf("-parameters", "-Xlint:unchecked,rawtypes", "-Werror"))
     }
+
     pmdMain {
         classpath = sourceSets.main.get().runtimeClasspath
     }

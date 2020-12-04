@@ -7,12 +7,14 @@ import sk.tuke.kpi.oop.game.weapons.Fireable;
 
 
 public class Fire<A extends Armed> extends AbstractAction<A> {
-    private A actor;
-    public Fire(A shooter){
-       this.actor = shooter;
-    }
+
     @Override
     public void execute(float deltaTime) {
+        if(getActor()==null){
+            setDone(true);
+            return;
+        }
+        A actor=getActor();
         Fireable ammo=actor.getFirearm().fire();
         if(ammo!=null && actor != null) {
             actor.getScene().addActor(ammo, actor.getPosX()+8, actor.getPosY()+8);

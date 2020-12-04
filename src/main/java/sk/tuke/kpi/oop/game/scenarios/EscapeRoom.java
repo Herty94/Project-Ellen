@@ -28,8 +28,8 @@ public class EscapeRoom implements SceneListener {
     public void sceneCreated(@NotNull Scene scene) {
 
         scene.getMessageBus().subscribe(World.ACTOR_ADDED_TOPIC,actor -> {
-            if(actor instanceof Alien)
-                randomMove((Movable)actor);
+           // if(actor instanceof Alien)
+                //randomMove((Movable)actor);
         });
     }
 
@@ -84,10 +84,10 @@ public class EscapeRoom implements SceneListener {
         }
 
     }
-    private Disposable randomMove(Movable actor){
+    /*private Disposable randomMove(Movable actor){
 
         Move<Movable> move  =  new Move<>(Direction.EAST,10);
 
         return move.scheduleFor(actor);
-    }
+    }*/
 }

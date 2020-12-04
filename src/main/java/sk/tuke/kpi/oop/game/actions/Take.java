@@ -43,6 +43,8 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
             kep.getBackpack().add(col);
         } catch (Exception ex) {
             scene.getGame().getOverlay().drawText(ex.getMessage(), 100, 100).showFor(2);
+            setDone(true);
+            return;
         }
         scene.removeActor(col);
         setDone(true);
