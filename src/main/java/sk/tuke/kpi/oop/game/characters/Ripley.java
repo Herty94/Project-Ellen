@@ -8,14 +8,17 @@ import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.items.Backpack;
+import sk.tuke.kpi.oop.game.weapons.Firearm;
+import sk.tuke.kpi.oop.game.weapons.Gun;
 
-public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
+public class Ripley extends AbstractActor implements Movable, Keeper, Alive ,Armed{
     private final int movingSpeed;
     private int ammo;
     private final boolean dead;
     private final Animation animation;
     private final Animation died;
     private final Backpack backpack;
+    private Firearm weapon;
     private final Health health;
     public Ripley(){
         super("Ellen");
@@ -28,6 +31,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
         this.dead=false;
         backpack = new Backpack("Ripley's backpack",10);
         health = new Health(100);
+        weapon =new Gun(10,100);
         health.onExhaustion(() -> {
             setAnimation(died);
 
@@ -45,7 +49,15 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
         return this.backpack;
     }
 
+    @Override
+    public Firearm getFirearm() {
+        return this.weapon;
+    }
 
+    @Override
+    public void setFirearm(Firearm weapon) {
+        this.weapon=weapon;
+    }
 
     @Override
     public Health getHealth() {
@@ -81,7 +93,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
         int windowHeight = scene.getGame().getWindowSetup().getHeight();
         int yTextPos = windowHeight - GameApplication.STATUS_LINE_OFFSET*2;
         scene.getGame().getOverlay().drawText("Energy: "+this.health.getValue(),15,yTextPos);
-        scene.getGame().getOverlay().drawText("Ammo: "+this.ammo,15,yTextPos- GameApplication.STATUS_LINE_OFFSET);
+        scene.getGame().getOverlay().drawText("Ammo: "+this.weapon.getAmmo(),15,yTextPos- GameApplication.STATUS_LINE_OFFSET);
         scene.getGame().pushActorContainer(this.getBackpack());
     }
     public boolean isDead() {

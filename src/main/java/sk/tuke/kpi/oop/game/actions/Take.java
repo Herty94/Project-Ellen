@@ -15,8 +15,8 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
     private Scene scene;
     private K kep;
 
-    public Take(){
-
+    public Take(K kep){
+        this.kep=kep;
     }
     @Override
     public void execute(float deltaTime) {

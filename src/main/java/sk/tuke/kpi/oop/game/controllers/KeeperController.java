@@ -24,7 +24,7 @@ public class KeeperController implements KeyboardListener {
     public void keyPressed(@NotNull Key key) {
 
         switch(key){
-             case ENTER: new Take<>().scheduleFor(keeper);
+             case ENTER: new Take<>(keeper).scheduleFor(keeper);
                 break;
              case BACKSPACE: new Drop<>().scheduleFor(keeper);
                 break;

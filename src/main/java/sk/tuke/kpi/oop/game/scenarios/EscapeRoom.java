@@ -13,6 +13,7 @@ import sk.tuke.kpi.oop.game.characters.AlienMother;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
+import sk.tuke.kpi.oop.game.controllers.ShooterController;
 import sk.tuke.kpi.oop.game.items.AccessCard;
 import sk.tuke.kpi.oop.game.items.Ammo;
 import sk.tuke.kpi.oop.game.items.Energy;
@@ -38,7 +39,7 @@ public class EscapeRoom implements SceneListener {
         ripley = scene.getFirstActorByType(Ripley.class);
          scene.getInput().registerListener(new KeeperController(ripley));
          scene.getInput().registerListener(new MovableController(ripley));
-
+         scene.getInput().registerListener(new ShooterController(ripley));
     }
 
     @Override
