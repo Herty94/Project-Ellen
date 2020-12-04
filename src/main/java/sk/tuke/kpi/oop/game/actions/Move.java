@@ -57,7 +57,8 @@ public class Move<M extends Movable> implements Action<M> {
     }
 
     public void stop(){
-        Objects.requireNonNull(actor).stoppedMoving();
+        if(actor!=null)
+            Objects.requireNonNull(actor).stoppedMoving();
         this.done = true;
     }
 

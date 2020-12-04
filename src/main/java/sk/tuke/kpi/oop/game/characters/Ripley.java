@@ -28,6 +28,11 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
         this.dead=false;
         backpack = new Backpack("Ripley's backpack",10);
         health = new Health(100);
+        health.onExhaustion(() -> {
+            setAnimation(died);
+
+        });
+
     }
 
     @Override
@@ -82,4 +87,5 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive {
     public boolean isDead() {
         return this.dead;
     }
+
 }

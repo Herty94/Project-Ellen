@@ -69,7 +69,7 @@ public class MissionImpossible implements SceneListener {
         if(contamine&&time%10==0)
             ripley.getHealth().drain(1);
         time++;
-        if(ripley.isDead()){
+        if(ripley.getHealth().getValue()==0){
             keys.dispose();
             move.dispose();
         }

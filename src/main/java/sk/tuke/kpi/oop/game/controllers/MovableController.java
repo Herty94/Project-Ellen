@@ -31,6 +31,7 @@ public class MovableController implements KeyboardListener {
 
     @Override
     public void keyPressed(Input.@NotNull Key key) {
+
         if(keyDirectionMap.containsKey(key)) {
             this.directionSet.add(keyDirectionMap.get(key));
             this.direction=Direction.NONE;
@@ -48,6 +49,7 @@ public class MovableController implements KeyboardListener {
 
     @Override
     public void keyReleased(Input.@NotNull Key key) {
+
         if(keyDirectionMap.containsKey(key)){
             directionSet.remove(keyDirectionMap.get(key));
             this.direction=Direction.NONE;

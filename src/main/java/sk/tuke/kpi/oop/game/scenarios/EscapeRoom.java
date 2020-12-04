@@ -9,6 +9,7 @@ import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.Ventilator;
 import sk.tuke.kpi.oop.game.actions.Move;
 import sk.tuke.kpi.oop.game.characters.Alien;
+import sk.tuke.kpi.oop.game.characters.AlienMother;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
 import sk.tuke.kpi.oop.game.controllers.MovableController;
@@ -43,6 +44,8 @@ public class EscapeRoom implements SceneListener {
     @Override
     public void sceneUpdating(@NotNull Scene scene) {
         ripley.showRipleyState();
+        if(ripley.getHealth().getValue()==0)
+            scene.cancelActions(ripley);
         scene.follow(ripley);
     }
 
@@ -56,7 +59,6 @@ public class EscapeRoom implements SceneListener {
                 case "energy":
                     return new Energy();
                 case "door":
-
                     return new LockedDoor();
                 case "ammo":
                     return new Ammo();
@@ -68,8 +70,11 @@ public class EscapeRoom implements SceneListener {
                     return new Ventilator();
                 case "locker":
                     return new Locker();
+                case "alien mother":
+                    return new AlienMother();
                 default:
                     return null;
+
             }
 
         }
