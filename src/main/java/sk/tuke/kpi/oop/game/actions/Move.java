@@ -57,8 +57,9 @@ public class Move<M extends Movable> implements Action<M> {
     }
 
     public void stop(){
-        if(actor!=null)
+        if(actor!=null){
             Objects.requireNonNull(actor).stoppedMoving();
+        }
         this.done = true;
     }
 
@@ -80,11 +81,8 @@ public class Move<M extends Movable> implements Action<M> {
 
         this.duration_delta+=deltaTime;
         if((duration_delta-this.duration) >= 1e-5) {
-            this.done = true;
-            if(first ==false) {
-                actor.stoppedMoving();
-                first=true;
-            }
+            stop();
+
         }
 
     }
