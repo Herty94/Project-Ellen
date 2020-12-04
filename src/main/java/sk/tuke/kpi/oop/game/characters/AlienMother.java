@@ -8,6 +8,7 @@ public class AlienMother extends Alien {
     public AlienMother(){
         health=new Health(200);
         setAnimation(new Animation("sprites/mother.png",112,162,0.2f, Animation.PlayMode.LOOP));
+        health.onExhaustion(()->getScene().removeActor(this));
     }
 
     @Override
