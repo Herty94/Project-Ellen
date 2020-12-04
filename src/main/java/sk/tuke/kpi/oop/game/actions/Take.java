@@ -13,12 +13,12 @@ import java.util.Objects;
 
 public class Take<K extends Keeper>  extends AbstractAction<K> {
     private Scene scene;
-    private K kep;
 
     public Take(){
     }
     @Override
     public void execute(float deltaTime) {
+        K kep;
         if(getActor()==null||getActor().getScene()==null) {
             setDone(true);
             return;

@@ -10,6 +10,7 @@ public class Health {
     public Health(int health, int max){
         this.value=health;
         this.max=max;
+        this.list = new ArrayList<>();
     }
     @FunctionalInterface
     public interface ExhaustionEffect {
@@ -34,8 +35,10 @@ public class Health {
         this.value=this.max;
     }
     public void drain(int amount){
-        this.value -=amount;
-        if(this.value<=0) {
+        if(value-amount>0)
+           this.value -=amount;
+        else {
+            this.value = 0;
             exhaust();
         }
     }

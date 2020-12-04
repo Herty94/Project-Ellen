@@ -13,7 +13,8 @@ public class Ammo extends AbstractActor implements Usable<Armed> {
 
     @Override
     public void useWith(Armed actor) {
-        int ammo = actor.getFirearm().getAmmo();
+        if(actor==null)
+            return;
         actor.getFirearm().reload(50);
         getScene().removeActor(this);
 
