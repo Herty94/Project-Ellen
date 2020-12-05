@@ -4,10 +4,12 @@ import sk.tuke.kpi.gamelib.GameApplication;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.gamelib.messages.Topic;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.items.Backpack;
+import sk.tuke.kpi.oop.game.openables.Door;
 import sk.tuke.kpi.oop.game.weapons.Firearm;
 import sk.tuke.kpi.oop.game.weapons.Gun;
 
@@ -20,6 +22,8 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive ,Arm
     private final Backpack backpack;
     private Firearm weapon;
     private final Health health;
+    public static final Topic<Ripley> RIPLEY_DIED = Topic.create("ripley died", Ripley.class);
+
     public Ripley(){
         super("Ellen");
         this.movingSpeed = 2;
@@ -32,7 +36,10 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive ,Arm
         backpack = new Backpack("Ripley's backpack",10);
         health = new Health(100);
         weapon =new Gun(10,100);
-        health.onExhaustion(() -> setAnimation(died));
+        health.onExhaustion(() ->{
+            setAnimation(died);
+            getScene().getMessageBus().publish(RIPLEY_DIED,this);
+        });
 
     }
 

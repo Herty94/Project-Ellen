@@ -20,24 +20,42 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
     private boolean opened;
     private final Animation anim;
     private MapTile upper;
+    private Orientation or;
     private MapTile bottom;
     public static final Topic<Door> DOOR_OPENED = Topic.create("door opened", Door.class);
     public static final Topic<Door> DOOR_CLOSED = Topic.create("door closed", Door.class);
-    public Door(){
-        this.anim= new Animation("sprites/vdoor.png",16,32,0.1f);
+    public Door(String name,Orientation or){
+        super(name);
+        this.or=or;
+        if(or.equals(Orientation.HORIZONTAL))
+            this.anim= new Animation("sprites/hdoor.png",32,16,0.1f);
+        else if(or.equals(Orientation.VERTICAL))
+            this.anim= new Animation("sprites/vdoor.png",16,32,0.1f);
+        else
+            this.anim =new Animation("sprites/vdoor.png",16,32,0.1f);
         anim.resetToFirstFrame();
         anim.pause();
         setAnimation(anim);
         this.opened = false;
 
     }
+    public enum Orientation{
+        HORIZONTAL,
+        VERTICAL
+    }
 
     @Override
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
         System.out.println(this.getPosX()/16);
-        upper = scene.getMap().getTile(this.getPosX()/16,(this.getPosY()+16)/16);
-        bottom = scene.getMap().getTile(this.getPosX()/16,this.getPosY()/16);
+        if(or.equals(Orientation.VERTICAL)) {
+            upper = scene.getMap().getTile(this.getPosX() / 16, (this.getPosY() + 16) / 16);
+            bottom = scene.getMap().getTile(this.getPosX() / 16, this.getPosY() / 16);
+        }
+        else {
+            upper = scene.getMap().getTile(this.getPosX() / 16, this.getPosY() / 16);
+            bottom = scene.getMap().getTile((this.getPosX() + 16) / 16,this.getPosY() / 16 );
+        }
         setWall(WALL);
     }
 

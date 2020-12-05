@@ -61,25 +61,27 @@ public enum Direction {
 
     }
     public static Direction fromAngle(float angle){
-        System.out.println("angle is this: "+angle);
         if(angle == 0f||angle==360f)
             return Direction.NORTH;
         else if(angle == 90f || angle == -270f)
             return Direction.WEST;
-        else if(angle == -90f||angle == 270f)
+        else if(angle == -90f || angle == 270f)
             return Direction.EAST;
-        else if(angle == 180f||angle ==-180f)
+        else
+            return check(angle);
+    }
+    private static Direction check(float angle){
+        if(angle == 180f || angle ==-180f)
             return Direction.SOUTH;
-        else if(angle == 135f|| angle==-225f)
+        else if(angle == 135f || angle==-225f)
             return Direction.SOUTHWEST;
         else if(angle == -135f || angle==225f)
             return Direction.SOUTHEAST;
         else if(angle == 45f || angle==-315f)
             return Direction.NORTHWEST;
-        else if(angle == -45f|| angle==315f)
+        else if(angle == -45f || angle==315f)
             return Direction.NORTHEAST;
         else
             return Direction.NONE;
-
     }
 }

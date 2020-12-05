@@ -14,6 +14,7 @@ import sk.tuke.kpi.oop.game.controllers.ShooterController;
 import sk.tuke.kpi.oop.game.items.AccessCard;
 import sk.tuke.kpi.oop.game.items.Ammo;
 import sk.tuke.kpi.oop.game.items.Hammer;
+import sk.tuke.kpi.oop.game.openables.Door;
 import sk.tuke.kpi.oop.game.openables.LockedDoor;
 
 public class EscapeRoom implements SceneListener {
@@ -66,8 +67,12 @@ public class EscapeRoom implements SceneListener {
                     return new Ripley();
                 case "energy":
                     return new Energy();
-                case "door":
-                    return new LockedDoor();
+                case "front door":
+                    return new Door("front door", Door.Orientation.VERTICAL);
+                case "back door":
+                    return new Door("back door", Door.Orientation.HORIZONTAL);
+                case "exit door":
+                    return new Door("exit door", Door.Orientation.VERTICAL);
                 case "ammo":
                     return new Ammo();
                 case "alien":

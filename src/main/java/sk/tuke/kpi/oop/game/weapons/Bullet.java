@@ -22,7 +22,7 @@ public class Bullet extends AbstractActor implements Fireable{
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
         for(Actor ac : scene.getActors())
-            if(ac instanceof Alive && !(ac instanceof Ripley))
+            if(ac instanceof Alive )
                 new When<>(()-> this.intersects(ac),
                     new Invoke<>(()->{
                         ((Alive) ac).getHealth().drain(30);

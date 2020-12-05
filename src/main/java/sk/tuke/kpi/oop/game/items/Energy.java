@@ -10,7 +10,6 @@ public class Energy extends AbstractActor implements Usable<Alive> {
 
     public Energy(){
         setAnimation(new Animation("sprites/energy.png"));
-
     }
     @Override
     public void useWith(Alive actor) {

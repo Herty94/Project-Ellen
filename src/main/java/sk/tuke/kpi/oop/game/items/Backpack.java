@@ -47,7 +47,7 @@ public class Backpack implements ActorContainer<Collectible> {
         if(capacity>collectible.size())
             collectible.add(actor);
         else
-           throw new IllegalAccessError(name+" is full");
+           throw new IllegalAccessError("Backpack is full");
     }
 
     @Override
