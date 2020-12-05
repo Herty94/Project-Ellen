@@ -17,7 +17,7 @@ public class Fire<A extends Armed> extends AbstractAction<A> {
         A actor=getActor();
         Fireable ammo=actor.getFirearm().fire();
         if(ammo!=null && actor != null) {
-            actor.getScene().addActor(ammo, actor.getPosX()+8+(Direction.fromAngle(actor.getAnimation().getRotation()).getDx()*20), actor.getPosY()+8+(Direction.fromAngle(actor.getAnimation().getRotation()).getDy()*20));
+            actor.getScene().addActor(ammo, actor.getPosX()+8+(Direction.fromAngle(actor.getAnimation().getRotation()).getDx()*32), actor.getPosY()+8+(Direction.fromAngle(actor.getAnimation().getRotation()).getDy()*32));
             new Move<>(Direction.fromAngle(actor.getAnimation().getRotation()), Float.MAX_VALUE).scheduleFor(ammo);
         }
         setDone(true);

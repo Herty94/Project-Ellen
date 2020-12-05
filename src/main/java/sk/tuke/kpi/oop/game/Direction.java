@@ -77,7 +77,11 @@ public enum Direction {
             return Direction.SOUTHWEST;
         else if(angle == -135f || angle==225f)
             return Direction.SOUTHEAST;
-        else if(angle == 45f || angle==-315f)
+        else
+            return checkA(angle);
+    }
+    private static Direction checkA(float angle){
+        if(angle == 45f || angle==-315f)
             return Direction.NORTHWEST;
         else if(angle == -45f || angle==315f)
             return Direction.NORTHEAST;
