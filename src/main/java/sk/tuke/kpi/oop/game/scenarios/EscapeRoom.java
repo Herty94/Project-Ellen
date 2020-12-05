@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.oop.game.*;
-import sk.tuke.kpi.oop.game.actions.Move;
+import sk.tuke.kpi.oop.game.items.Energy;
 import sk.tuke.kpi.oop.game.characters.Alien;
 import sk.tuke.kpi.oop.game.characters.AlienMother;
 import sk.tuke.kpi.oop.game.characters.Ripley;
@@ -13,7 +13,7 @@ import sk.tuke.kpi.oop.game.controllers.MovableController;
 import sk.tuke.kpi.oop.game.controllers.ShooterController;
 import sk.tuke.kpi.oop.game.items.AccessCard;
 import sk.tuke.kpi.oop.game.items.Ammo;
-import sk.tuke.kpi.oop.game.items.Energy;
+import sk.tuke.kpi.oop.game.items.Hammer;
 import sk.tuke.kpi.oop.game.openables.LockedDoor;
 
 public class EscapeRoom implements SceneListener {
@@ -26,6 +26,9 @@ public class EscapeRoom implements SceneListener {
 
     @Override
     public void sceneCreated(@NotNull Scene scene) {
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
 
         scene.getMessageBus().subscribe(World.ACTOR_ADDED_TOPIC,actor -> {
            // if(actor instanceof Alien)

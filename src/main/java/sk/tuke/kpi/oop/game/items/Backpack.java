@@ -22,8 +22,7 @@ public class Backpack implements ActorContainer<Collectible> {
     }
     @Override
     public @NotNull List<Collectible> getContent() {
-        List<Collectible> colList = new ArrayList<>(collectible);
-         return colList;
+        return new ArrayList<>(collectible);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class Backpack implements ActorContainer<Collectible> {
 
     @Override
     public void add(@NotNull Collectible actor) {
-        if(capacity>collectible.size()+1)
+        if(capacity>collectible.size())
             collectible.add(actor);
         else
            throw new IllegalAccessError(name+" is full");
