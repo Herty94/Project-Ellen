@@ -26,6 +26,7 @@ public class Bullet extends AbstractActor implements Fireable{
                 new When<>(()-> this.intersects(ac),
                     new Invoke<>(()->{
                         ((Alive) ac).getHealth().drain(30);
+                        if(((Alive) ac).getHealth().getValue()!=0)
                         getScene().removeActor(this);
                     })).scheduleFor(this);
     }

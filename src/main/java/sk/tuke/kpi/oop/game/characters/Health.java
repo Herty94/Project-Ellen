@@ -35,9 +35,9 @@ public class Health {
         this.value=this.max;
     }
     public void drain(int amount){
-        if(value-amount>0)
+        if(value>0)
            this.value -=amount;
-        else {
+        if(value<=0) {
             this.value = 0;
             exhaust();
         }
@@ -45,6 +45,7 @@ public class Health {
     public void exhaust(){
         this.value = 0;
         list.forEach(ExhaustionEffect::apply);
+        list.removeAll(list);
     }
 
     public void onExhaustion(ExhaustionEffect effect){
