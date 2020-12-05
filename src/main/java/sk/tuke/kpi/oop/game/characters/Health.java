@@ -6,7 +6,7 @@ import java.util.List;
 public class Health {
     private final int max;
     private int value;
-    private List<ExhaustionEffect> list;
+    private final List<ExhaustionEffect> list;
     public Health(int health, int max){
         this.value=health;
         this.max=max;
