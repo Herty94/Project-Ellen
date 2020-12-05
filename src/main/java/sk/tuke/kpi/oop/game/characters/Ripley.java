@@ -78,6 +78,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive ,Arm
     public void startedMoving(Direction direction) {
         animation.setRotation(direction.getAngle());
         animation.play();
+        System.out.println("Ripley rotation: "+animation.getRotation());
 
     }
 

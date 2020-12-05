@@ -1,5 +1,7 @@
 package sk.tuke.kpi.oop.game;
 
+import sk.tuke.kpi.gamelib.actions.When;
+
 public enum Direction {
     NORTH(0,1),
     NORTHEAST(1,1),
@@ -18,18 +20,23 @@ public enum Direction {
         this.dy=dy;
     }
     public float getAngle(){
-        float degreX=0f;
-        float degreY=0f;
-        if(this.equals(SOUTHWEST))
-            return 135f;
-        if(dx!=0)
-            degreX = (float)Math.toDegrees(Math.asin(dx));
-        if(dy!=0)
-            degreY = (float)Math.toDegrees(Math.acos(dy));
-        if(dx==0||dy==0)
-            return 360-degreX+degreY;
-        else
-            return 360-(degreX+degreY)/2;
+        if(this.equals(NORTH))
+            return 0f;
+        else if(this.equals(EAST))
+            return -90f;
+        else if(this.equals(WEST))
+            return 90f;
+        else if(this.equals(SOUTH))
+            return 180f;
+        else if(this.equals(NORTHEAST))
+            return -45f;
+        else if(this.equals(NORTHWEST))
+            return 45f;
+        else if(this.equals(SOUTHWEST))
+            return 135;
+        else if(this.equals(SOUTHEAST))
+            return -135f;
+        else return 0;
     }
 
     public int getDx() {
@@ -56,18 +63,24 @@ public enum Direction {
     }
     public static Direction fromAngle(float angle){
         System.out.println("angle is this: "+angle);
-        switch((int) angle){
-            case 360:
-            case 0: return Direction.NORTH;
-            case 270: return Direction.EAST;
-            case 450: return Direction.WEST;
-            case 540: return Direction.SOUTH;
-            case 315: return Direction.NORTHEAST;
-            case 405: return Direction.NORTHWEST;
-            case 495: return Direction.SOUTHEAST;
-            case 585: return Direction.SOUTHWEST;
-            default: return Direction.NONE;
-        }
+        if(angle == 0f)
+            return Direction.NORTH;
+        else if(angle == 90f)
+            return Direction.WEST;
+        else if(angle == -90f)
+            return Direction.EAST;
+        else if(angle == 180f)
+            return Direction.SOUTH;
+        else if(angle == 135f)
+            return Direction.SOUTHWEST;
+        else if(angle == -135f)
+            return Direction.SOUTHEAST;
+        else if(angle == 45f)
+            return Direction.NORTHWEST;
+        else if(angle == -45f)
+            return Direction.NORTHEAST;
+        else
+            return Direction.NONE;
 
     }
 }
