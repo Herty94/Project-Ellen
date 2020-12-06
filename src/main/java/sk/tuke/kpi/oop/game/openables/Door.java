@@ -66,8 +66,9 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
 
     @Override
     public void open() {
-        if(anim.getCurrentFrameIndex()!=0|| opened)
+        if(opened)
             return;
+        anim.resetToFirstFrame();
         anim.setPlayMode(Animation.PlayMode.ONCE);
         anim.play();
         setWall(CLEAR);
@@ -77,8 +78,9 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
 
     @Override
     public void close() {
-        if(anim.getCurrentFrameIndex()!=3 || !opened)
+        if(anim.getCurrentFrameIndex()!=3 && !opened)
             return;
+        anim.resetToFirstFrame();
         anim.setPlayMode(Animation.PlayMode.ONCE_REVERSED);
         anim.play();
         setWall(WALL);
@@ -100,10 +102,8 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
             return;
         if(!opened) {
             open();
-            opened=!opened;
         }
         else
             close();
-            opened=!opened;
     }
 }

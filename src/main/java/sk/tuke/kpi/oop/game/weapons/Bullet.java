@@ -9,7 +9,7 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.characters.Alive;
-import sk.tuke.kpi.oop.game.characters.Ripley;
+
 
 public class Bullet extends AbstractActor implements Fireable{
     private final Animation anim;
@@ -22,13 +22,14 @@ public class Bullet extends AbstractActor implements Fireable{
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
         for(Actor ac : scene.getActors())
-            if(ac instanceof Alive )
+            if(ac instanceof Alive ) {
                 new When<>(()-> this.intersects(ac),
                     new Invoke<>(()->{
-                        ((Alive) ac).getHealth().drain(30);
-                        if(((Alive) ac).getHealth().getValue()!=0)
                         getScene().removeActor(this);
+                        ((Alive) ac).getHealth().drain(30);
+
                     })).scheduleFor(this);
+            }
     }
 
     @Override
