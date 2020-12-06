@@ -9,11 +9,20 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
+import sk.tuke.kpi.oop.game.behaviours.Behaviour;
 
 public class Alien extends AbstractActor implements Movable,Enemy,Alive {
     private final Health health;
     private final Animation anim;
+    private Behaviour beh;
     public Alien(){
+        anim = new Animation("sprites/alien.png",32,32,0.1f, Animation.PlayMode.LOOP);
+        setAnimation(anim);
+        this.health = new Health(100);
+        health.onExhaustion(()->getScene().removeActor(this));
+    }
+    public Alien(Behaviour<? super Alien> behaviour){
+        this.beh = behaviour;
         anim = new Animation("sprites/alien.png",32,32,0.1f, Animation.PlayMode.LOOP);
         setAnimation(anim);
         this.health = new Health(100);
@@ -27,6 +36,7 @@ public class Alien extends AbstractActor implements Movable,Enemy,Alive {
     @Override
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
+        if(beh!=null) beh.setUp(this);
         new Loop<>(new Invoke<>(this::hurt)).scheduleFor(this);
     }
     private void hurt(){
