@@ -30,6 +30,15 @@ public class EscapeRoom implements SceneListener {
         scene.addActor(new Hammer(),100,100);
         scene.addActor(new Hammer(),100,100);
         scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
+        scene.addActor(new Hammer(),100,100);
 
         scene.getMessageBus().subscribe(World.ACTOR_ADDED_TOPIC,actor -> {
            // if(actor instanceof Alien)

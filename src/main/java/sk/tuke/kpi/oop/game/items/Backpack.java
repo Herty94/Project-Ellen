@@ -44,10 +44,11 @@ public class Backpack implements ActorContainer<Collectible> {
 
     @Override
     public void add(@NotNull Collectible actor) {
+
         if(capacity>collectible.size())
             collectible.add(actor);
         else
-           throw new IllegalAccessError("Backpack is full");
+            throw new IllegalStateException(name+" is full");
     }
 
     @Override

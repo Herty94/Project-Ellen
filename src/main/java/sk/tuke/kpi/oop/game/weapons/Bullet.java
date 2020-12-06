@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.Invoke;
-import sk.tuke.kpi.gamelib.actions.When;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
+import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.characters.Alive;
@@ -21,15 +21,15 @@ public class Bullet extends AbstractActor implements Fireable{
     @Override
     public void addedToScene(@NotNull Scene scene) {
         super.addedToScene(scene);
-        for(Actor ac : scene.getActors())
-            if(ac instanceof Alive ) {
-                new When<>(()-> this.intersects(ac),
-                    new Invoke<>(()->{
-                        getScene().removeActor(this);
-                        ((Alive) ac).getHealth().drain(30);
+            new Loop<>(
+                new Invoke<>(()->{
+                    for(Actor ac : scene.getActors())
+                        if(ac instanceof Alive &&ac.intersects(this)) {
+                            ((Alive) ac).getHealth().drain(30);
+                            getScene().removeActor(this);
+                        }
+                })).scheduleFor(this);
 
-                    })).scheduleFor(this);
-            }
     }
 
     @Override
