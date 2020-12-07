@@ -2,7 +2,6 @@ package sk.tuke.kpi.oop.game.behaviours;
 
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.messages.Topic;
-import sk.tuke.kpi.oop.game.openables.Door;
 
 import java.util.function.Predicate;
 

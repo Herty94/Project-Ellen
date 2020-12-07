@@ -1,6 +1,5 @@
 package sk.tuke.kpi.oop.game.behaviours;
 
-import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.oop.game.Direction;
@@ -19,14 +18,12 @@ public class RandomlyMoving implements Behaviour<Movable> {
         move = new Move<>(Direction.NONE, Float.MAX_VALUE);
         move.scheduleFor(actor);
         new Loop<>(new Invoke<>(()->{
-            if(actor!=null){
-                random = (Math.abs(new Random().nextInt()));
-                System.out.println("RandomMoving: "+random);
-                if(random%50==1) {
+            random = (Math.abs(new Random().nextInt()));
+            if(actor!=null&&random%50==1){
                     if (move != null && !move.isDone()) move.stop();
                     move = new Move<>(Direction.values()[random % Direction.values().length], Float.MAX_VALUE);
-                    move.scheduleFor((Movable) actor);
-                }
+                    move.scheduleFor( actor);
+
             }
         })).scheduleFor(actor);
     }
