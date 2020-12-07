@@ -87,8 +87,7 @@ public class EscapeRoom implements SceneListener {
                     return new Ammo();
                 case "alien":
                     if(type.endsWith("running")) {
-                        System.out.println("-------------------------------running alien");
-                        //return new Alien(100, new RandomlyMoving());
+                        return new Alien(100, new RandomlyMoving());
                     }
                     else return new Alien();
                 case "access card":

@@ -15,11 +15,14 @@ public class RandomlyMoving implements Behaviour<Actor> {
     @Override
     public void setUp(Actor actor) {
         new Loop<>(new Invoke<>(()->{
-            random = (new Random().nextInt());
-            System.out.println("RandomMoving: "+random);
-            if(random%10!=1){
-                if(move!=null&&!move.isDone()) move.stop();
-                move = new Move<Movable>(Direction.values()[random%Direction.values().length],Float.MAX_VALUE);
+            if(actor!=null){
+                random = (Math.abs(new Random().nextInt()));
+                System.out.println("RandomMoving: "+random);
+                if(random%50==1) {
+                    if (move != null && !move.isDone()) move.stop();
+                    move = new Move<>(Direction.values()[random % Direction.values().length], Float.MAX_VALUE);
+                    move.scheduleFor((Movable) actor);
+                }
             }
         })).scheduleFor(actor);
     }

@@ -72,7 +72,7 @@ public class Move<M extends Movable> implements Action<M> {
     public void execute(float deltaTime) {
         if(done)
             return;
-        if(direction == Direction.NONE){
+        if(direction == Direction.NONE||actor==null){
             stop();
             return;
         }
@@ -93,7 +93,6 @@ public class Move<M extends Movable> implements Action<M> {
         this.duration_delta+=deltaTime;
         if((duration_delta-this.duration) >= 1e-5) {
             stop();
-            return;
         }
 
     }
