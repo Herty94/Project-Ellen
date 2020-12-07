@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.oop.game.*;
+import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.items.Energy;
 import sk.tuke.kpi.oop.game.characters.Alien;
 import sk.tuke.kpi.oop.game.characters.AlienMother;
@@ -85,7 +86,11 @@ public class EscapeRoom implements SceneListener {
                 case "ammo":
                     return new Ammo();
                 case "alien":
-                    return new Alien();
+                    if(type.endsWith("running")) {
+                        System.out.println("-------------------------------running alien");
+                        //return new Alien(100, new RandomlyMoving());
+                    }
+                    else return new Alien();
                 case "access card":
                     return new AccessCard();
                 case "ventilator":

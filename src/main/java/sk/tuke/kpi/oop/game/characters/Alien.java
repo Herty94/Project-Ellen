@@ -14,18 +14,18 @@ import sk.tuke.kpi.oop.game.behaviours.Behaviour;
 public class Alien extends AbstractActor implements Movable,Enemy,Alive {
     private final Health health;
     private final Animation anim;
-    private Behaviour beh;
+    private Behaviour<? super Alien> beh;
     public Alien(){
         anim = new Animation("sprites/alien.png",32,32,0.1f, Animation.PlayMode.LOOP);
         setAnimation(anim);
         this.health = new Health(100);
         health.onExhaustion(()->getScene().removeActor(this));
     }
-    public Alien(Behaviour<? super Alien> behaviour){
+    public Alien(int healthValue,Behaviour<? super Alien> behaviour){
         this.beh = behaviour;
         anim = new Animation("sprites/alien.png",32,32,0.1f, Animation.PlayMode.LOOP);
         setAnimation(anim);
-        this.health = new Health(100);
+        this.health = new Health(healthValue);
         health.onExhaustion(()->getScene().removeActor(this));
     }
     @Override

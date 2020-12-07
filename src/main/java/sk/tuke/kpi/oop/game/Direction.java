@@ -60,6 +60,7 @@ public enum Direction {
         return NONE;
 
     }
+
     public static Direction fromAngle(float angle){
         if(angle == 0f||angle==360f)
             return Direction.NORTH;
