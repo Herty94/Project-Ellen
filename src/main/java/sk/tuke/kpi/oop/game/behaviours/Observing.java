@@ -19,7 +19,13 @@ public class Observing<A extends Actor, T> implements Behaviour<A> {
     }
     @Override
     public void setUp(A actor) {
-        //actor.getScene().getMessageBus().subscribe(delegate.predicate, door -> contamine = true);
+        if(actor==null)
+            return;
+        actor.getScene().getMessageBus().subscribe(topic,t -> {
+            if(predicate.test(t)){
+                delegate.setUp(actor);
+            }
+        });
     }
     // ...
 }

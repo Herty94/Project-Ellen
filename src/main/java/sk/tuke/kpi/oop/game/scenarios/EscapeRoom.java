@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.oop.game.*;
+import sk.tuke.kpi.oop.game.behaviours.Observing;
 import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.items.Energy;
 import sk.tuke.kpi.oop.game.characters.Alien;
@@ -86,10 +87,7 @@ public class EscapeRoom implements SceneListener {
                 case "ammo":
                     return new Ammo();
                 case "alien":
-                    if(type.endsWith("running")) {
-                        return new Alien(100, new RandomlyMoving());
-                    }
-                    else return new Alien();
+                    return alienCreate(type);
                 case "access card":
                     return new AccessCard();
                 case "ventilator":
@@ -102,8 +100,18 @@ public class EscapeRoom implements SceneListener {
                     return null;
 
             }
-
         }
+        private Alien alienCreate(String type){
+            if(type.endsWith("running")) {
+                return new Alien(100, new RandomlyMoving());
+            }
+            else if(type.endsWith("waiting1")) return new Alien(100,new Observing<>(Door.DOOR_OPENED,actor->actor.getName().endsWith("front door")
+                ,new RandomlyMoving()));
+            else if(type.endsWith("waiting2")) return new Alien(100,new Observing<>(Door.DOOR_OPENED,actor->actor.getName().endsWith("back door")
+                ,new RandomlyMoving()));
+            else return new Alien();
+        }
+
 
     }
     /*private Disposable randomMove(Movable actor){

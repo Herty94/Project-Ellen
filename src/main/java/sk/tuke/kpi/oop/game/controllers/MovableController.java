@@ -53,7 +53,6 @@ import java.util.Set;
                 this.direction=Direction.NONE;
                 for (Direction direc : directionSet)
                     this.direction=this.direction.combine(direc);
-
                 if(move!=null)
                     move.stop();
                 if(directionSet.isEmpty())
