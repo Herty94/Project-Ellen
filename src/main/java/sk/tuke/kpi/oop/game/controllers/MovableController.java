@@ -35,12 +35,12 @@ import java.util.Set;
             if(keyDirectionMap.containsKey(key)) {
                 this.directionSet.add(keyDirectionMap.get(key));
                 this.direction=Direction.NONE;
-                for (Direction direc : directionSet)
-                    this.direction=this.direction.combine(direc);
+                directionSet.forEach(direct ->{
+                    this.direction = this.direction.combine(direct);
+                });
                 System.out.println(direction);
                 if(move!=null)
                     move.stop();
-                System.out.println("pressed "+directionSet);
                 move = new Move<>(direction,86400);
                 move.scheduleFor(actor);
             }
@@ -51,8 +51,9 @@ import java.util.Set;
             if(keyDirectionMap.containsKey(key)){
                 directionSet.remove(keyDirectionMap.get(key));
                 this.direction=Direction.NONE;
-                for (Direction direc : directionSet)
-                    this.direction=this.direction.combine(direc);
+                directionSet.forEach(direct ->{
+                    this.direction = this.direction.combine(direct);
+                });
                 if(move!=null)
                     move.stop();
                 if(directionSet.isEmpty())
