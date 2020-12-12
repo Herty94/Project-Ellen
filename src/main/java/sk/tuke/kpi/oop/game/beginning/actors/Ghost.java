@@ -23,7 +23,7 @@ public class Ghost extends AbstractActor{
         anim = new Animation("sprites/ghost.png",32,32,0.2f, Animation.PlayMode.LOOP_PINGPONG);
         setAnimation(anim);
         anim.stop();
-        radius = 150;
+        radius = 180;
     }
     private void chase(){
         if(this.ripley== null)

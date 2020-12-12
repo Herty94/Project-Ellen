@@ -15,4 +15,7 @@ public class Body extends AbstractActor {
     public void addedToScene(@NotNull Scene scene) {
 
     }
+    public void heal(){
+
+    }
 }

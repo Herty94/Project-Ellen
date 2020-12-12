@@ -2,6 +2,7 @@ package sk.tuke.kpi.oop.game.items;
 
 import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
+import sk.tuke.kpi.gamelib.graphics.Color;
 
 
 public abstract class BreakableTool<A extends Actor> extends AbstractActor implements Usable<A>{
@@ -20,6 +21,7 @@ public abstract class BreakableTool<A extends Actor> extends AbstractActor imple
             this.remainingUses--;
             if(this.remainingUses<=0&&getScene()!=null) {
                     (getScene()).removeActor(this);
+                    this.getAnimation().setTint(Color.GRAY);
             }
     }
 

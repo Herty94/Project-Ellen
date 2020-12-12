@@ -67,7 +67,7 @@ public class Beginning implements SceneListener {
                 case "body":
                     return new Body();
                 case "alien":
-                    return alienCreate(type);
+                    return new Alien(100, new RandomlyMoving());
                 case "electricity":
                     return new Electricity();
                 case "standbutton":
@@ -95,16 +95,7 @@ public class Beginning implements SceneListener {
             else
                 return new Door("front door", Door.Orientation.HORIZONTAL);
         }
-        private Alien alienCreate(String type){
-            if(type.endsWith("running")) {
-                return new Alien(100, new RandomlyMoving());
-            }
-            else if(type.endsWith("waiting1")) return new Alien(100,new Observing<>(Door.DOOR_OPENED, actor->actor.getName().endsWith("front door")
-                ,new RandomlyMoving()));
-            else if(type.endsWith("waiting2")) return new Alien(100,new Observing<>(Door.DOOR_OPENED,actor->actor.getName().endsWith("back door")
-                ,new RandomlyMoving()));
-            else return new Alien();
-        }
+
 
 
     }

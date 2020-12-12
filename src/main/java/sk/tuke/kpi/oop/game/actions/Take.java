@@ -31,10 +31,11 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
         for (Actor s : list) {
             if ((kep.intersects(s) && s instanceof Collectible)&&s!=kep.getBackpack().peek()) {
                 col = (Collectible)s;
+                scene.removeActor(col);
                 break;
             }
         }
-
+        System.out.println("Take action");
         if(col==null) {
             setDone(true);
             return;
@@ -52,8 +53,7 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
             System.out.println("Take weared");
             setDone(true);
         }
-        else
-        scene.removeActor(col);
+
         setDone(true);
     }
 }
