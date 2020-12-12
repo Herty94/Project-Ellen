@@ -12,7 +12,7 @@ import sk.tuke.kpi.oop.game.items.Backpack;
 import sk.tuke.kpi.oop.game.weapons.Firearm;
 import sk.tuke.kpi.oop.game.weapons.Gun;
 
-public class Ripley extends AbstractActor implements Movable, Keeper, Alive ,Armed{
+public class Ripley extends AbstractActor implements Movable, Keeper, Alive, Armed {
     private final int movingSpeed;
     private int ammo;
     private final boolean dead;

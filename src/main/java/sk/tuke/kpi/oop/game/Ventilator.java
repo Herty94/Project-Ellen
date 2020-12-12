@@ -29,4 +29,8 @@ public class Ventilator extends AbstractActor implements Repairable{
         getScene().getMessageBus().publish(VENTILATOR_REPAIRED,this);
         return true;
     }
+
+    public boolean isRep() {
+        return rep;
+    }
 }

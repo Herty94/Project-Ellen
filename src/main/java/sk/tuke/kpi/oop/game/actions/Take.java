@@ -4,8 +4,8 @@ import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
+import sk.tuke.kpi.oop.game.beginning.actors.Wearable;
 import sk.tuke.kpi.oop.game.items.Collectible;
-
 
 import java.util.List;
 import java.util.Objects;
@@ -29,7 +29,7 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
         List<Actor> list = scene.getActors();
         Collectible col = null;
         for (Actor s : list) {
-            if ((kep.intersects(s) && s instanceof Collectible)) {
+            if ((kep.intersects(s) && s instanceof Collectible)&&s!=kep.getBackpack().peek()) {
                 col = (Collectible)s;
                 break;
             }
@@ -39,13 +39,20 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
             setDone(true);
             return;
         }
+
+
         try {
             kep.getBackpack().add(col);
+
         } catch (Exception ex) {
             scene.getGame().getOverlay().drawText(ex.getMessage(), 100, 100).showFor(2);
-            setDone(true);
-            return;
         }
+        if(col instanceof Wearable) {
+            ((Wearable) col).wearTop(kep);
+            System.out.println("Take weared");
+            setDone(true);
+        }
+        else
         scene.removeActor(col);
         setDone(true);
     }

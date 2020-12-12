@@ -17,7 +17,6 @@ import sk.tuke.kpi.oop.game.items.AccessCard;
 import sk.tuke.kpi.oop.game.items.Ammo;
 import sk.tuke.kpi.oop.game.items.Hammer;
 import sk.tuke.kpi.oop.game.openables.Door;
-import sk.tuke.kpi.oop.game.openables.LockedDoor;
 
 public class EscapeRoom implements SceneListener {
 

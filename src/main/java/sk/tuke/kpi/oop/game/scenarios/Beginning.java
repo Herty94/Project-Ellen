@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.oop.game.Locker;
 import sk.tuke.kpi.oop.game.Ventilator;
+import sk.tuke.kpi.oop.game.beginning.actors.*;
 import sk.tuke.kpi.oop.game.behaviours.Observing;
 import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.characters.Alien;
@@ -24,12 +25,20 @@ public class Beginning implements SceneListener {
     private Disposable shoot;
     private Disposable move;
     private Disposable use;
+    private boolean ghost;
     @Override
     public void sceneInitialized(@NotNull Scene scene) {
+        ghost = true;
+
         ripley = scene.getFirstActorByType(Ripley.class);
         use = scene.getInput().registerListener(new KeeperController(ripley));
         move =scene.getInput().registerListener(new MovableController(ripley));
         shoot = scene.getInput().registerListener(new ShooterController(ripley));
+        scene.getMessageBus().subscribe(Firethrower.FLAME_PICKET, fire -> {
+            if(ghost)
+                 scene.addActor(new Ghost(), 365,439);
+            ghost=false;
+        });
     }
     public static class Factory implements ActorFactory {
 
@@ -43,14 +52,28 @@ public class Beginning implements SceneListener {
                     return new Energy();
                 case "door":
                     return makeDoor(type);
+                case "vent":
+                    return new Ventilator();
+                case "blockade":
+                    return new Blockade();
                 case "back door":
                     return new Door("back door", Door.Orientation.HORIZONTAL);
                 case "exit door":
                     return new Door("exit door", Door.Orientation.VERTICAL);
                 case "ammo":
                     return new Ammo();
+                case "flamethrower":
+                    return new Firethrower();
+                case "body":
+                    return new Body();
                 case "alien":
                     return alienCreate(type);
+                case "electricity":
+                    return new Electricity();
+                case "standbutton":
+                    return new Button();
+                case "barrel":
+                    return new Barrel();
                 case "access card":
                     return new AccessCard();
                 case "ventilator":

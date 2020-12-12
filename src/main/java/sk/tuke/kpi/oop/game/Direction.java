@@ -47,18 +47,14 @@ public enum Direction {
     }
 
     public Direction combine(Direction other){
-
         int x=this.dx+other.getDx();
         int y=this.dy+other.getDy();
-        x=x<-1?-1:x;
-        x=x>1?1:x;
-        y=y<-1?-1:y;
-        y=y>1?1:y;
+        x=x<-1?-1:x>1?1:x;
+        y=y<-1?-1:y>1?1:y;
         for(Direction direc : Direction.values())
             if(direc.getDx()==x && direc.getDy() ==y)
                 return direc;
         return NONE;
-
     }
 
     public static Direction fromAngle(float angle){
