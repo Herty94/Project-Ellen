@@ -26,7 +26,6 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
         if(scene==null)
             this.scene = Objects.requireNonNull(getActor().getScene());
         kep = getActor();
-        List<Actor> list = scene.getActors();
         Collectible col = findCol(kep);
         System.out.println("Take action");
         if(col==null) {
