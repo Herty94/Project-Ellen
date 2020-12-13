@@ -27,19 +27,12 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
             this.scene = Objects.requireNonNull(getActor().getScene());
         kep = getActor();
         List<Actor> list = scene.getActors();
-        Collectible col = null;
-        for (Actor s : list) {
-            if ((kep.intersects(s) && s instanceof Collectible)&& s!=kep.getBackpack().peek()) {
-                col = (Collectible)s;
-                break;
-            }
-        }
+        Collectible col = findCol(kep);
         System.out.println("Take action");
         if(col==null) {
             setDone(true);
             return;
         }
-
 
         try {
             kep.getBackpack().add(col);
@@ -56,5 +49,16 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
         }
         scene.removeActor(col);
         setDone(true);
+    }
+    private Collectible findCol(K kep){
+        List<Actor> list = scene.getActors();
+        Collectible col = null;
+        for (Actor s : list) {
+            if ((kep.intersects(s) && s instanceof Collectible)&& s!=kep.getBackpack().peek()) {
+                col = (Collectible)s;
+                return col;
+            }
+        }
+        return null;
     }
 }
