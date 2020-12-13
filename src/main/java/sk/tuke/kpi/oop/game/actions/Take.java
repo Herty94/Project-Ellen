@@ -29,9 +29,8 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
         List<Actor> list = scene.getActors();
         Collectible col = null;
         for (Actor s : list) {
-            if ((kep.intersects(s) && s instanceof Collectible)&&s!=kep.getBackpack().peek()) {
+            if ((kep.intersects(s) && s instanceof Collectible)&& s!=kep.getBackpack().peek()) {
                 col = (Collectible)s;
-                scene.removeActor(col);
                 break;
             }
         }
@@ -47,13 +46,15 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
 
         } catch (Exception ex) {
             scene.getGame().getOverlay().drawText(ex.getMessage(), 100, 100).showFor(2);
+            setDone(true);
+            return;
         }
         if(col instanceof Wearable) {
             ((Wearable) col).wearTop(kep);
             System.out.println("Take weared");
             setDone(true);
         }
-
+        scene.removeActor(col);
         setDone(true);
     }
 }

@@ -2,9 +2,6 @@ package sk.tuke.kpi.oop.game.beginning.actors;
 
 import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Scene;
-import sk.tuke.kpi.gamelib.actions.ActionSequence;
-import sk.tuke.kpi.gamelib.actions.Invoke;
-import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.map.MapTile;
@@ -35,8 +32,6 @@ public class Blockade extends AbstractActor implements Destroyable {
     @Override
     public void destroy() {
         tiles.forEach(tile->tile.setType(MapTile.Type.CLEAR));
-        new ActionSequence<>(
-            new Wait<>(2),
-            new Invoke<>(()->getScene().removeActor(this))).scheduleFor(this);
+        getScene().removeActor(this);
     }
 }

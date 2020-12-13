@@ -1,13 +1,14 @@
 package sk.tuke.kpi.oop.game.beginning.actors;
 
-import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
-import sk.tuke.kpi.oop.game.items.Usable;
+import sk.tuke.kpi.oop.game.items.BreakableTool;
+import sk.tuke.kpi.oop.game.items.Collectible;
 
-public class Heal extends AbstractActor implements Usable<Body> {
+public class Heal extends BreakableTool<Body> implements Collectible {
 
 
     public Heal(){
+        super(1);
         setAnimation(new Animation("sprites/heal.png"));
     }
 
@@ -15,6 +16,7 @@ public class Heal extends AbstractActor implements Usable<Body> {
     public void useWith(Body actor) {
         if(actor!=null)
             actor.heal();
+        super.useWith(actor);
     }
 
     @Override
