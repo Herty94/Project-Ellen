@@ -2,7 +2,7 @@ package sk.tuke.kpi.oop.game.actions;
 
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Direction;
-import sk.tuke.kpi.oop.game.beginning.actors.Pushable;
+import sk.tuke.kpi.oop.game.beginning.Pushable;
 
 public class Push<P extends Pushable> extends AbstractAction<P> {
 

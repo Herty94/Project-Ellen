@@ -12,8 +12,8 @@ import sk.tuke.kpi.oop.game.actions.Drop;
 import sk.tuke.kpi.oop.game.actions.Shift;
 import sk.tuke.kpi.oop.game.actions.Use;
 import sk.tuke.kpi.oop.game.beginning.actors.Firethrower;
-import sk.tuke.kpi.oop.game.beginning.actors.Pushable;
-import sk.tuke.kpi.oop.game.beginning.actors.Wearable;
+import sk.tuke.kpi.oop.game.beginning.Pushable;
+import sk.tuke.kpi.oop.game.beginning.Wearable;
 import sk.tuke.kpi.oop.game.items.Usable;
 
 

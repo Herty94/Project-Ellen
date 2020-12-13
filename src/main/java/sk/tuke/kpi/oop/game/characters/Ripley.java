@@ -41,6 +41,7 @@ public class Ripley extends AbstractActor implements Movable, Keeper, Alive, Arm
         });
     }
 
+
     @Override
     public void collidedWithWall() {
 

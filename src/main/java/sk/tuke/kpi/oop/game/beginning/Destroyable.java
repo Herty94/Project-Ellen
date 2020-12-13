@@ -1,4 +1,4 @@
-package sk.tuke.kpi.oop.game.beginning.actors;
+package sk.tuke.kpi.oop.game.beginning;
 
 public interface Destroyable {
     void destroy();

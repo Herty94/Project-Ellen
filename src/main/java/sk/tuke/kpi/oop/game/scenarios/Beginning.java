@@ -6,7 +6,10 @@ import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.oop.game.Locker;
 import sk.tuke.kpi.oop.game.Ventilator;
 import sk.tuke.kpi.oop.game.beginning.actors.*;
-import sk.tuke.kpi.oop.game.behaviours.Observing;
+import sk.tuke.kpi.oop.game.beginning.patterns.CompleteTable;
+import sk.tuke.kpi.oop.game.beginning.patterns.DeadTable;
+import sk.tuke.kpi.oop.game.beginning.patterns.TableGenerator;
+
 import sk.tuke.kpi.oop.game.behaviours.RandomlyMoving;
 import sk.tuke.kpi.oop.game.characters.Alien;
 import sk.tuke.kpi.oop.game.characters.AlienMother;
@@ -39,6 +42,12 @@ public class Beginning implements SceneListener {
                  scene.addActor(new Ghost(), 365,439);
             ghost=false;
         });
+        scene.getMessageBus().subscribe(Ripley.RIPLEY_DIED,rip->new TableGenerator(new DeadTable(),scene));
+        scene.getMessageBus().subscribe(Body.BODY_HEALED,rip->{new TableGenerator(new CompleteTable(),scene);
+            scene.cancelActions(ripley);
+            use.dispose();
+            move.dispose();
+            shoot.dispose();});
     }
     public static class Factory implements ActorFactory {
 
@@ -78,8 +87,6 @@ public class Beginning implements SceneListener {
                     return new Barrel();
                 case "access card":
                     return new AccessCard();
-                case "ventilator":
-                    return new Ventilator();
                 case "locker":
                     return new Locker();
                 case "alien mother":

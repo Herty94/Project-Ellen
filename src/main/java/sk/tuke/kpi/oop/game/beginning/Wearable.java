@@ -1,4 +1,4 @@
-package sk.tuke.kpi.oop.game.beginning.actors;
+package sk.tuke.kpi.oop.game.beginning;
 
 import sk.tuke.kpi.oop.game.Keeper;
 import sk.tuke.kpi.oop.game.items.Collectible;

@@ -4,7 +4,7 @@ import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
-import sk.tuke.kpi.oop.game.beginning.actors.Wearable;
+import sk.tuke.kpi.oop.game.beginning.Wearable;
 import sk.tuke.kpi.oop.game.items.Collectible;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
     }
     private Collectible findCol(K kep){
         List<Actor> list = scene.getActors();
-        Collectible col = null;
+        Collectible col;
         for (Actor s : list) {
             if ((kep.intersects(s) && s instanceof Collectible)&& s!=kep.getBackpack().peek()) {
                 col = (Collectible)s;

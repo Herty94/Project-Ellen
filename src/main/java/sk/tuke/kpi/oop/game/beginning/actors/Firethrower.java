@@ -13,6 +13,8 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.gamelib.messages.Topic;
 import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Keeper;
+import sk.tuke.kpi.oop.game.beginning.Destroyable;
+import sk.tuke.kpi.oop.game.beginning.Wearable;
 import sk.tuke.kpi.oop.game.characters.Alive;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.items.Usable;
@@ -57,6 +59,7 @@ public class Firethrower extends AbstractActor implements Wearable, Usable<Riple
 
     @Override
     public void useWith(Ripley actor) {
+
         dis = new Loop<>(new Invoke<>(()->{
             if(fuel>0) {
                 this.fuel--;
@@ -67,7 +70,7 @@ public class Firethrower extends AbstractActor implements Wearable, Usable<Riple
                     for (Actor actor1 : actor.getScene().getActors()) {
                         if(actor1 instanceof Alive && actor1.intersects(flames)&&!actor.getScene().getMap().intersectsWithWall(flames))
                             ((Alive) actor1).getHealth().drain(5);
-                        if(actor1 instanceof Destroyable&& actor1.intersects(flames))
+                        if(actor1 instanceof Destroyable && actor1.intersects(flames))
                             ((Destroyable)actor1).destroy();
                 }
             }

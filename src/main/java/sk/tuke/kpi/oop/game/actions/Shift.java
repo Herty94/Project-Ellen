@@ -3,7 +3,7 @@ package sk.tuke.kpi.oop.game.actions;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.actions.AbstractAction;
 import sk.tuke.kpi.oop.game.Keeper;
-import sk.tuke.kpi.oop.game.beginning.actors.Wearable;
+import sk.tuke.kpi.oop.game.beginning.Wearable;
 
 import java.util.Objects;
 
