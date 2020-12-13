@@ -66,6 +66,8 @@ public class Beginning implements SceneListener {
                     return new Firethrower();
                 case "body":
                     return new Body();
+                case "heal":
+                    return new Heal();
                 case "alien":
                     return new Alien(100, new RandomlyMoving());
                 case "electricity":

@@ -47,7 +47,8 @@ public class Take<K extends Keeper>  extends AbstractAction<K> {
             System.out.println("Take weared");
             setDone(true);
         }
-        scene.removeActor(col);
+        else
+            scene.removeActor(col);
         setDone(true);
     }
     private Collectible findCol(K kep){
